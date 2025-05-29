@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon Clock</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f0f0f;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Glowing background animation */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, #00ffff22, #ff00ff11, #000000 70%);
+      animation: backgroundGlow 10s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes backgroundGlow {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .ring-wrapper {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      padding: 10px;
+      background: conic-gradient(from 0deg, #00ffff, #ff00ff, #00ff00, #ff9900, #00ffff);
+      animation: spin 6s linear infinite;
+      z-index: 1;
+    }
+
+    .inner-ring {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 2;
+      box-shadow: 0 0 30px #00ffff44;
+    }
+
+    .time {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #00ffff;
+      margin-bottom: 10px;
+    }
+
+    .coming-soon {
+      font-size: 1.5rem;
+      color: #ffffff;
+      animation: pulse 2s infinite;
+      text-align: center;
+    }
+
+    .tagline {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: #ccc;
+      text-align: center;
+      max-width: 80%;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @media (max-width: 500px) {
+      .ring-wrapper { width: 200px; height: 200px; }
+      .time { font-size: 2rem; }
+      .coming-soon { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ring-wrapper">
+    <div class="ring"></div>
+    <div class="inner-ring">
+      <div class="time" id="time">00:00:00</div>
+      <div class="coming-soon">🚀 Coming Soon...</div>
+    </div>
+  </div>
+
+  <div class="tagline">
+    📢 **A short test is launching soon!**<br/>
+    ⏳ Participate in the upcoming challenge and stand a chance to win an official certificate.<br/><br/>
+    🔔 Stay connected — you'll be notified as soon as the test goes live. Don’t miss out on this opportunity to prove your skills and earn recognition!
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hrs = String(now.getHours()).padStart(2, '0');
+      const mins = String(now.getMinutes()).padStart(2, '0');
+      const secs = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById("time").textContent = `${hrs}:${mins}:${secs}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+</html>
