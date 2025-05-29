@@ -1,33 +1,79 @@
 # 👨‍💻 Procourseify
 
-Welcome to **Procourseify** – a hub of simplified learning, real-world projects, and creative coding solutions.
+Welcome to **Procourseify** – your learning partner in tech, design, and innovation.
 
-🚀 Currently working on:
-- Educational websites on Science, Math & Programming  
-- Interactive tools for students & developers  
-- Android apps with real-time features
+🚀 **What we do:**
+- Build simplified, real-world based learning tools  
+- Create engaging websites & apps in science, coding, and engineering  
+- Deliver content that’s practical, project-based, and fully open to curious minds
 
-🎯 Mission:  
-To make learning **easy, accessible, and practical** for everyone – one course at a time.
-
-📚 Skills in progress:
-- Full-Stack Web Development  
-- Android with Java & Kotlin  
-- GitHub Actions, Open Source & Community Collaboration
-
-📬 Reach me:  
-📧 `team.procourseify.com` (official)  
-🌐 [www.procourseify.com](https://www.procourseify.com)  
+🎯 **Our Mission:**  
+To make learning **easy, accessible, and practically useful** for everyone – one project at a time.
 
 ---
 
-🔒 **Note:**  
-All repositories and content under `@procourseify` are protected.  
-**Do not copy, clone, or redistribute without written permission.**  
+## 💡 Skills & Technologies
+
+We’re constantly learning, experimenting, and building with:
+
+### 🧑‍💻 **Programming & Development**
+- Full-Stack Web Development  
+- HTML & CSS  
+- JavaScript  
+- Python  
+- C++  
+- C#  
+- Java  
+- Kotlin  
+- Swift  
+- Go  
+- Ruby  
+- Node.js  
+- React  
+- Angular  
+- SQL  
+- MongoDB  
+
+### 📱 **App & UI/UX**
+- Android with Java & Kotlin  
+- iOS with Swift  
+- App Development  
+- UI/UX Design  
+
+### 🛠️ **Engineering Tools**
+- SolidWorks  
+- AutoCAD  
+- Fusion 360  
+- CATIA  
+
+### ☁️ **Cloud & DevOps**
+- GitHub Actions  
+- DevOps  
+- AWS  
+- Cloud Computing  
+
+### 📊 **Data & Analytics**
+- Excel  
+- Power BI  
+- Tableau  
+- Artificial Intelligence  
+
+### 🔒 **Security & Optimization**
+- Cyber Security  
+- Ethical Hacking  
+- SEO  
+- ERP 9  
+
+---
+
+📬 **Connect with us:**  
+📧 `team.procourseify.com`  
+🌐 [www.procourseify.com](https://www.procourseify.com)
+
+---
+
+🔒 **Notice:**  
+All content and repositories under `@procourseify` are protected.  
+**Unauthorized copying, cloning, or redistribution is strictly prohibited.**  
 
 © Procourseify. All rights reserved.
-
-<!---
-procourseify/procourseify is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
