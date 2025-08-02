@@ -116,7 +116,7 @@
   <div class="nav-bar" id="navBar">
     <a href="https://procourseify.com/"> Home</a>
     <a href="https://procourseify.com/help-center.html">ℹ️ Help</a>
-    <a href="https://yourwebsite.com/setting.html"> Contact</a>
+    <a href="https://procourseify.com/setting.html"> Contact</a>
   </div>
 
   <a id="linkedinBtn" href="#" target="_blank" class="linkedin-btn"> Share on LinkedIn</a>
@@ -132,7 +132,7 @@
         document.getElementById('loaderBox').style.display = 'none';
 
         const iframe = document.getElementById('certViewer');
-        iframe.src = "Certificates/" + certFile;
+        iframe.src = "certificates/" + certFile; // 🔁 Fixed lowercase path
         iframe.style.display = 'block';
 
         // Show nav buttons
