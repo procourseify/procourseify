@@ -111,7 +111,7 @@
     <h2>Please wait while we verify your credentials.</h2>
   </div>
 
-  <iframe id="certViewer" onerror="handleLoadError()"></iframe>
+  <iframe id="certViewer"></iframe>
 
   <div class="nav-bar" id="navBar">
     <a href="https://procourseify.com/"> Home</a>
@@ -125,32 +125,34 @@
     const params = new URLSearchParams(window.location.search);
     const certFile = params.get("cert");
 
-    function handleLoadError() {
-      document.getElementById('certViewer').style.display = 'none';
-      document.getElementById('loaderBox').style.display = 'block';
-      document.getElementById('loaderBox').innerHTML = '<div class="error">❌ Certificate doesn\'t found!</div>';
-    }
-
     if (!certFile) {
       document.getElementById('loaderBox').innerHTML = '<div class="error">❌ Certificate not found in request!</div>';
     } else {
-      setTimeout(() => {
-        document.getElementById('loaderBox').style.display = 'none';
+      const certPath = "certificates/" + certFile;
 
-        const iframe = document.getElementById('certViewer');
-        iframe.src = "certificates/" + certFile;
-        iframe.style.display = 'block';
+      fetch(certPath, { method: 'HEAD' }).then(res => {
+        if (res.ok) {
+          // File exists
+          document.getElementById('loaderBox').style.display = 'none';
+          const iframe = document.getElementById('certViewer');
+          iframe.src = certPath;
+          iframe.style.display = 'block';
 
-        // Show nav buttons
-        document.getElementById('navBar').style.display = 'flex';
+          document.getElementById('navBar').style.display = 'flex';
 
-        // Show LinkedIn button
-        const shareURL = window.location.href;
-        const linkedInShareLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareURL)}`;
-        const linkedinBtn = document.getElementById("linkedinBtn");
-        linkedinBtn.href = linkedInShareLink;
-        linkedinBtn.style.display = 'inline-block';
-      }, 3000);
+          const shareURL = window.location.href;
+          const linkedInShareLink = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareURL)}`;
+          const linkedinBtn = document.getElementById("linkedinBtn");
+          linkedinBtn.href = linkedInShareLink;
+          linkedinBtn.style.display = 'inline-block';
+
+        } else {
+          // File not found
+          document.getElementById('loaderBox').innerHTML = '<div class="error">❌ Certificate doesn\'t found!</div>';
+        }
+      }).catch(err => {
+        document.getElementById('loaderBox').innerHTML = '<div class="error">❌ Error loading certificate file.</div>';
+      });
     }
   </script>
 
