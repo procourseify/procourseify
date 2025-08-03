@@ -111,7 +111,7 @@
     <h2>Please wait while we verify your credentials.</h2>
   </div>
 
-  <iframe id="certViewer"></iframe>
+  <iframe id="certViewer" onerror="handleLoadError()"></iframe>
 
   <div class="nav-bar" id="navBar">
     <a href="https://procourseify.com/"> Home</a>
@@ -125,6 +125,12 @@
     const params = new URLSearchParams(window.location.search);
     const certFile = params.get("cert");
 
+    function handleLoadError() {
+      document.getElementById('certViewer').style.display = 'none';
+      document.getElementById('loaderBox').style.display = 'block';
+      document.getElementById('loaderBox').innerHTML = '<div class="error">❌ Certificate doesn\'t found!</div>';
+    }
+
     if (!certFile) {
       document.getElementById('loaderBox').innerHTML = '<div class="error">❌ Certificate not found in request!</div>';
     } else {
@@ -132,7 +138,7 @@
         document.getElementById('loaderBox').style.display = 'none';
 
         const iframe = document.getElementById('certViewer');
-        iframe.src = "certificates/" + certFile; // 🔁 Fixed lowercase path
+        iframe.src = "certificates/" + certFile;
         iframe.style.display = 'block';
 
         // Show nav buttons
