@@ -1,0 +1,466 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ProCourseify">
+        <title>ProCourseify</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/apexcharts.css" rel="stylesheet">
+        <link href="css/procourseify.css" rel="stylesheet">
+        <style>
+          
+
+            
+    
+    /* Loader animation */
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Message styles */
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .processing {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+            
+            .hidden { display: none; }
+            .form-section input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            .question-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Full screen blur + dark overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Message box style */
+.overlay-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+
+        </style>
+    </head>
+    <body oncontextmenu="return false" onselectstart="return false"  oncopy="return false" oncut="return false" onpaste="return false">
+        <header class="navbar sticky-top flex-md-nowrap">
+            <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-box"></i>
+                    ProCourseify
+                </a>
+            </div>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="navbar-nav me-lg-2">
+                <div class="nav-item text-nowrap d-flex align-items-center">
+                    <div class="dropdown ps-3">
+                        <a class="nav-link dropdown-toggle text-center" href="#" data-bs-toggle="dropdown">
+                            <i class="bi-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                            <small>Notifications</small>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-success"><i class="notifications-icon bi-check-circle-fill"></i></div><div><span>Feel free to share your certificate on LinkedIn or social media.</span></div></a></li>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-info"><i class="notifications-icon bi-folder"></i></div><div><span>Enhance your skills now</span></div></a></li>
+                            <li class="notifications-block"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-danger"><i class="notifications-icon bi-question-circle"></i></div><div><span>Get Certificate!</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <img src="images/web logo.png" class="profile-image img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                    <div class="position-sticky py-4 px-3 sidebar-sticky">
+                        <ul class="nav flex-column h-100">
+                            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi-house-fill me-2"></i>Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="notification.html"><i class="bi-bell me-2"></i>Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="setting.html"><i class="bi-gear me-2"></i>Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="help-center.html"><i class="bi-question-circle me-2"></i>Help Center</a></li>
+                            <li class="nav-item featured-box mt-lg-5 mt-4 mb-4"><img src="images/certi.png" class="img-fluid" alt=""><a class="btn custom-btn" href="#">Certificate</a></li>
+                            <li class="nav-item border-top mt-auto pt-2"><a class="nav-link" href="#"><i class="bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">ProCourseify</h1>
+                        <small class="text-muted">welcome back!</small>
+                        <small class="text-muted">eBharat is a Government of India-recognized MSME.</small>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-lg-12 col-12">
+                            <!-- form start -->
+                            <div id="personalSection" class="form-section">
+
+                                <!-- Personal Details Form -->
+  <form id="personalForm">
+    <h2>Personal Details</h2>
+
+    <input type="hidden" name="Date" id="dateField">
+    <input type="hidden" name="Time" id="timeField">
+
+    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+    <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
+    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
+    <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
+    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
+    <div class="form-group"><label>State:</label><input name="State" required></div>
+    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
+    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
+    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
+    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <!-- Question Form -->
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbzE9T3pqGdSdf6ncyGbEl86fHmjnAlc2Acyc5EGy8OwuOFa5RQ9MFIRVsQl0pXgDG8k/exec">
+    <!-- Hidden personal fields -->
+    <input type="hidden" name="FullName">
+    <input type="hidden" name="Mobile">
+    <input type="hidden" name="AltMobile">
+    <input type="hidden" name="Email">
+    <input type="hidden" name="AltEmail">
+    <input type="hidden" name="State">
+    <input type="hidden" name="Course">
+    <input type="hidden" name="JobRef">
+    <input type="hidden" name="InternRef">
+    <input type="hidden" name="StateRef">
+    <input type="hidden" name="Date">
+    <input type="hidden" name="Time">
+
+    <h2>Test Questions</h2>
+    <small class="text-muted">Answering all questions is mandatory.</small>
+    <div id="questionContainer"></div>
+
+    <div class="form-group">
+      <button type="button" id="nextQuestionBtn">Next</button>
+      <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    </div>
+  </form>
+
+  <!-- Status Messages -->
+  <div id="statusMessage" class="message hidden"></div>
+
+
+
+
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <footer class="site-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <p class="copyright-text">Copyright © ProCourseify 2025 - Design: <a href="https://www.procourseify.com">ProCourseify</a> __eBharat__ <span>	<a href="terms_and_conditions.html">Terms and Conditions</a></span></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        <!-- Already Submitted Overlay -->
+<div id="alreadySubmittedOverlay" class="overlay" style="display: none;">
+  <div class="overlay-message">⚠️ Data Already Submitted!</div>
+</div>
+
+
+
+
+
+        <script>
+    const personalForm = document.getElementById('personalForm');
+    const questionForm = document.getElementById('questionForm');
+    const questionContainer = document.getElementById('questionContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+  const questions = [
+  "Q1: What is the primary purpose of Cyber Security?\n(A) Protect systems and data from cyber attacks\n(B) Improve internet speed\n(C) Increase software sales\n(D) Manage hardware resources",
+  "Q2: What does 'phishing' mean?\n(A) Attempt to steal sensitive information by pretending to be a trustworthy entity\n(B) Hacking into a system\n(C) Installing antivirus software\n(D) Encrypting data",
+  "Q3: Which one is a type of malware?\n(A) Virus\n(B) Firewall\n(C) Encryption\n(D) Backup",
+  "Q4: What is a firewall?\n(A) A security system that monitors and controls incoming and outgoing network traffic\n(B) A type of malware\n(C) A physical wall for servers\n(D) An antivirus program",
+  "Q5: What does 'two-factor authentication' (2FA) mean?\n(A) Using two methods to verify identity\n(B) Two users logging in together\n(C) Having two passwords\n(D) Using a firewall twice",
+  "Q6: What is ransomware?\n(A) Malware that locks your files until a ransom is paid\n(B) A tool for data backup\n(C) A secure communication protocol\n(D) A type of antivirus",
+  "Q7: Which protocol is used to secure communication over the internet?\n(A) HTTPS\n(B) HTTP\n(C) FTP\n(D) SMTP",
+  "Q8: What is social engineering?\n(A) Manipulating people to give confidential information\n(B) Engineering social networks\n(C) Coding social apps\n(D) Designing user interfaces",
+  "Q9: Which is a strong password practice?\n(A) Using a mix of letters, numbers, and symbols\n(B) Using your birthdate\n(C) Using 'password123'\n(D) Using the same password everywhere",
+  "Q10: What is the purpose of encryption?\n(A) To convert data into a coded form to prevent unauthorized access\n(B) To delete data\n(C) To copy data\n(D) To speed up data transfer",
+
+  "Q11: What is a VPN?\n(A) Virtual Private Network\n(B) Very Powerful Network\n(C) Verified Public Network\n(D) Virtual Public Network",
+  "Q12: What is a zero-day vulnerability?\n(A) A software flaw unknown to the vendor and unpatched\n(B) A vulnerability patched immediately\n(C) A type of malware\n(D) A virus detected on day zero",
+  "Q13: What is the role of an antivirus program?\n(A) Detect and remove malware\n(B) Increase internet speed\n(C) Manage passwords\n(D) Create backups",
+  "Q14: What is spoofing?\n(A) Pretending to be another device or user\n(B) Encrypting data\n(C) Backing up files\n(D) Installing a firewall",
+  "Q15: What does 'DDoS' stand for?\n(A) Distributed Denial of Service\n(B) Digital Data of Service\n(C) Direct Denial of Security\n(D) Distributed Data of Service",
+  "Q16: What is a brute force attack?\n(A) Trying all possible password combinations to gain access\n(B) Sending phishing emails\n(C) Stealing cookies\n(D) Encrypting files",
+  "Q17: What is a common sign of a phishing email?\n(A) Suspicious links or requests for personal info\n(B) Personalized greeting\n(C) Proper grammar and spelling\n(D) Official company domain email",
+  "Q18: What is the principle of least privilege?\n(A) Giving users only the access they need\n(B) Giving all access to everyone\n(C) No access to anyone\n(D) Unlimited access for administrators",
+  "Q19: What is a botnet?\n(A) A network of compromised computers controlled by an attacker\n(B) A secure network\n(C) Antivirus software\n(D) A firewall",
+  "Q20: What is patch management?\n(A) Updating software to fix vulnerabilities\n(B) Creating backups\n(C) Encrypting data\n(D) Installing antivirus",
+
+  "Q21: What does SSL stand for?\n(A) Secure Sockets Layer\n(B) Secure System Link\n(C) Safe Server Login\n(D) Secure Software License",
+  "Q22: What is a keylogger?\n(A) Malware that records keystrokes\n(B) A password manager\n(C) Firewall\n(D) Antivirus",
+  "Q23: What does 'spoofing' attack target?\n(A) Network or identity\n(B) Hardware only\n(C) Software only\n(D) User interfaces",
+  "Q24: Which one is a physical security measure?\n(A) Biometric scanners\n(B) Firewalls\n(C) Encryption\n(D) Antivirus",
+  "Q25: What is a Trojan horse?\n(A) Malware disguised as legitimate software\n(B) Antivirus software\n(C) A type of firewall\n(D) Backup tool",
+  "Q26: What is the purpose of penetration testing?\n(A) To find vulnerabilities in systems\n(B) To install antivirus\n(C) To backup data\n(D) To encrypt data",
+  "Q27: What is SQL injection?\n(A) Attack exploiting vulnerabilities in database queries\n(B) Installing SQL software\n(C) Backup of SQL databases\n(D) Encrypting SQL data",
+  "Q28: What is meant by 'data breach'?\n(A) Unauthorized access to sensitive data\n(B) Data backup\n(C) Data encryption\n(D) Network setup",
+  "Q29: Which one is a strong network security protocol?\n(A) WPA3\n(B) WEP\n(C) FTP\n(D) HTTP",
+  "Q30: What does MFA stand for?\n(A) Multi-Factor Authentication\n(B) Multiple Firewall Access\n(C) Main Frame Authorization\n(D) Multi File Access",
+
+  "Q31: What is an IDS?\n(A) Intrusion Detection System\n(B) Internet Data Server\n(C) Internal Data Security\n(D) Integrated Data System",
+  "Q32: What is ransomware typically used for?\n(A) Extortion\n(B) Data backup\n(C) Security testing\n(D) Data encryption by owners",
+  "Q33: What does the term 'white hat hacker' mean?\n(A) Ethical hacker\n(B) Malicious hacker\n(C) Script kiddie\n(D) Software developer",
+  "Q34: What is the difference between HTTP and HTTPS?\n(A) HTTPS is secure with encryption\n(B) HTTP is faster\n(C) HTTPS is for emails\n(D) HTTP is secure",
+  "Q35: What is social engineering attack?\n(A) Manipulating people to divulge confidential info\n(B) Hacking software\n(C) Encrypting data\n(D) Backing up files",
+  "Q36: What is a cookie in cyber security?\n(A) Data stored on user's device by websites\n(B) Malware\n(C) Antivirus\n(D) Firewall",
+  "Q37: What is spear phishing?\n(A) Targeted phishing attack\n(B) Random spam email\n(C) Malware\n(D) Firewall",
+  "Q38: What does 'ethical hacking' involve?\n(A) Authorized attempts to find vulnerabilities\n(B) Unauthorized hacking\n(C) Virus creation\n(D) Data deletion",
+  "Q39: What is a worm?\n(A) Self-replicating malware\n(B) Firewall\n(C) Antivirus\n(D) Backup tool",
+  "Q40: What is meant by 'zero trust' security?\n(A) Never trust any device or user by default\n(B) Trust everything\n(C) Trust only internal network\n(D) No security",
+
+  "Q41: What is a brute force attack?\n(A) Trying all password combinations\n(B) Sending malware\n(C) Encrypting data\n(D) Phishing",
+  "Q42: What is meant by 'patch' in cyber security?\n(A) Software update fixing vulnerabilities\n(B) A backup\n(C) Encryption key\n(D) Firewall setting",
+  "Q43: What is cross-site scripting (XSS)?\n(A) Injection of malicious scripts into trusted websites\n(B) Secure protocol\n(C) Antivirus software\n(D) Firewall setting",
+  "Q44: What is the function of a firewall?\n(A) Monitor and filter network traffic\n(B) Backup data\n(C) Encrypt data\n(D) Delete malware",
+  "Q45: What is the difference between virus and worm?\n(A) Worm self-replicates; virus needs host\n(B) Virus self-replicates; worm needs host\n(C) Both same\n(D) Virus is hardware",
+  "Q46: What is a digital certificate?\n(A) Electronic document verifying identity\n(B) Antivirus software\n(C) Encryption tool\n(D) Firewall setting",
+  "Q47: What does 'DoS' stand for?\n(A) Denial of Service\n(B) Data on Server\n(C) Digital Operating System\n(D) Domain of Security",
+  "Q48: What is the main purpose of encryption?\n(A) Protect data confidentiality\n(B) Speed up data transfer\n(C) Backup data\n(D) Manage passwords",
+  "Q49: What is spyware?\n(A) Software that secretly gathers user information\n(B) Antivirus\n(C) Firewall\n(D) Backup tool",
+  "Q50: What is an exploit?\n(A) Code that takes advantage of a vulnerability\n(B) Antivirus\n(C) Firewall\n(D) Backup tool",
+
+  "Q51: What is a honeypot?\n(A) Decoy system to lure attackers\n(B) Firewall\n(C) Antivirus\n(D) Backup system",
+  "Q52: What is the meaning of 'rootkit'?\n(A) Malware that hides its presence\n(B) Antivirus\n(C) Firewall\n(D) Backup system",
+  "Q53: What does 'Trojan' malware do?\n(A) Disguises as legitimate software\n(B) Encrypts files\n(C) Deletes files\n(D) Copies files",
+  "Q54: What is two-factor authentication?\n(A) Two-step verification for user identity\n(B) Two passwords\n(C) Two users\n(D) Two firewalls",
+  "Q55: What is the best way to protect against phishing?\n(A) Do not click suspicious links\n(B) Use strong password\n(C) Backup data\n(D) Use firewall",
+  "Q56: What is SSL used for?\n(A) Securing data transmission\n(B) Encrypting files\n(C) Backing up data\n(D) Detecting malware",
+  "Q57: What is a key aspect of cyber security?\n(A) Confidentiality, Integrity, Availability\n(B) Speed\n(C) Size\n(D) Cost",
+  "Q58: What is an example of a social engineering attack?\n(A) Phishing\n(B) Virus\n(C) Worm\n(D) Firewall",
+  "Q59: What is meant by 'data integrity'?\n(A) Accuracy and consistency of data\n(B) Encryption\n(C) Backup\n(D) Data speed",
+  "Q60: What is the purpose of a VPN?\n(A) Secure private connection over public network\n(B) Backup data\n(C) Encrypt files\n(D) Firewall protection",
+
+  "Q61: What is a session hijacking attack?\n(A) Taking over a user's active session\n(B) Deleting data\n(C) Encrypting data\n(D) Backup failure",
+  "Q62: What is malware?\n(A) Malicious software\n(B) Backup software\n(C) Antivirus\n(D) Firewall",
+  "Q63: How can you protect against malware?\n(A) Install antivirus and keep it updated\n(B) Use weak passwords\n(C) Disable firewall\n(D) Ignore software updates",
+  "Q64: What is a common characteristic of ransomware?\n(A) Demand payment to restore access\n(B) Deletes files\n(C) Encrypts data for backup\n(D) Improves speed",
+  "Q65: What does 'ethical hacking' mean?\n(A) Authorized hacking to improve security\n(B) Illegal hacking\n(C) Virus creation\n(D) Data deletion",
+  "Q66: What is cross-site request forgery (CSRF)?\n(A) Attack forcing user to execute unwanted actions\n(B) Virus\n(C) Worm\n(D) Firewall",
+  "Q67: What is a strong password?\n(A) Combination of letters, numbers, symbols, and length\n(B) 'password123'\n(C) Birthdate\n(D) Simple words",
+  "Q68: What is a man-in-the-middle attack?\n(A) Attacker intercepts communication between two parties\n(B) Data backup\n(C) Encryption\n(D) Firewall",
+  "Q69: What is meant by 'authorization'?\n(A) Permission to access resources\n(B) User login\n(C) Password\n(D) Data encryption",
+  "Q70: What is the role of antivirus software?\n(A) Detect and remove malicious software\n(B) Backup data\n(C) Encrypt files\n(D) Manage passwords",
+
+  "Q71: What is a public key?\n(A) Part of asymmetric encryption shared publicly\n(B) Password\n(C) Private data\n(D) Backup key",
+  "Q72: What is a private key?\n(A) Part of asymmetric encryption kept secret\n(B) Public password\n(C) Firewall\n(D) Antivirus",
+  "Q73: What is phishing?\n(A) Attempt to get sensitive info by pretending to be trustworthy\n(B) Virus\n(C) Worm\n(D) Firewall",
+  "Q74: What is a botnet used for?\n(A) Conducting cyber attacks\n(B) Backup\n(C) Encryption\n(D) Antivirus",
+  "Q75: What is a firewall?\n(A) Network security system\n(B) Backup software\n(C) Antivirus\n(D) Encryption tool",
+  "Q76: What is data encryption?\n(A) Converting data into coded form\n(B) Deleting data\n(C) Copying data\n(D) Speeding data",
+  "Q77: What is a brute force attack?\n(A) Trying all password combinations\n(B) Sending spam\n(C) Virus\n(D) Worm",
+  "Q78: What is social engineering?\n(A) Manipulating people for info\n(B) Coding\n(C) Networking\n(D) Encryption",
+  "Q79: What is a zero-day attack?\n(A) Attack exploiting unknown vulnerability\n(B) Backup\n(C) Firewall\n(D) Antivirus",
+  "Q80: What is multi-factor authentication?\n(A) Using multiple methods to verify identity\n(B) Using one password\n(C) Using no passwords\n(D) Using only biometrics",
+
+  "Q81: What is a digital certificate used for?\n(A) Verify identity\n(B) Backup data\n(C) Encrypt files\n(D) Detect malware",
+  "Q82: What is a Trojan horse?\n(A) Malware disguised as legitimate software\n(B) Antivirus\n(C) Backup\n(D) Firewall",
+  "Q83: What is a denial-of-service attack?\n(A) Overloading a system to make it unavailable\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q84: What is SQL injection?\n(A) Attack targeting databases\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q85: What is a honeypot in cyber security?\n(A) Decoy system to attract attackers\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q86: What is the main goal of cyber security?\n(A) Protect data and systems\n(B) Increase speed\n(C) Reduce costs\n(D) Expand networks",
+  "Q87: What is the use of biometric security?\n(A) Using fingerprints or retina scan for authentication\n(B) Passwords\n(C) Backup\n(D) Encryption",
+  "Q88: What is a virus?\n(A) Malware that attaches to files\n(B) Backup tool\n(C) Firewall\n(D) Encryption software",
+  "Q89: What is a worm?\n(A) Malware that self-replicates\n(B) Backup tool\n(C) Antivirus\n(D) Encryption software",
+  "Q90: What is a security policy?\n(A) Rules to protect systems\n(B) Backup procedure\n(C) Encryption method\n(D) Software license",
+
+  "Q91: What is a penetration test?\n(A) Authorized simulated attack to find vulnerabilities\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q92: What is ransomware?\n(A) Malware demanding payment\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q93: What is cross-site scripting (XSS)?\n(A) Injecting malicious code into websites\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q94: What does HTTPS indicate?\n(A) Secure connection\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q95: What is a botnet?\n(A) Network of infected devices\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q96: What is the meaning of 'confidentiality' in cyber security?\n(A) Keeping information secret\n(B) Sharing information\n(C) Deleting information\n(D) Encrypting files",
+  "Q97: What is phishing?\n(A) Fraudulent attempt to obtain sensitive information\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q98: What is the role of a firewall?\n(A) Block unauthorized access\n(B) Backup\n(C) Encryption\n(D) Antivirus",
+  "Q99: What is a digital signature?\n(A) Electronic signature verifying authenticity\n(B) Backup\n(C) Encryption\n(D) Firewall",
+  "Q100: What is the best way to stay safe online?\n(A) Use strong passwords and keep software updated\n(B) Share passwords\n(C) Ignore updates\n(D) Use public Wi-Fi for sensitive transactions"
+];
+
+    let currentQuestion = 0;
+
+    // Fill Date & Time
+    const now = new Date();
+    document.getElementById('dateField').value = now.toLocaleDateString();
+    document.getElementById('timeField').value = now.toLocaleTimeString();
+
+    // Create questions
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('form-group', 'question');
+      if (i !== 0) div.classList.add('hidden');
+      div.innerHTML = `<label>${q}</label><input type="text" name="Q${i + 1}">`;
+      questionContainer.appendChild(div);
+    });
+
+    const allQuestions = document.querySelectorAll('.question');
+
+    personalForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = personalForm.elements;
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+          const field = questionForm.querySelector(`[name="${inputs[i].name}"]`);
+          if (field) field.value = inputs[i].value;
+        }
+      }
+      personalForm.classList.add('hidden');
+      questionForm.classList.remove('hidden');
+    });
+
+nextBtn.addEventListener('click', function () {
+  // Validation: Check current question answer is not empty
+  const currentInput = allQuestions[currentQuestion].querySelector('input');
+  if (!currentInput.value.trim()) {
+    alert("Please answer this question before proceeding.");
+    return; // Stop execution, don't move to next question
+  }
+
+  if (currentQuestion < allQuestions.length - 1) {
+    allQuestions[currentQuestion].classList.add('hidden');
+    currentQuestion++;
+    allQuestions[currentQuestion].classList.remove('hidden');
+    if (currentQuestion === allQuestions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    }
+  }
+});
+
+
+    // Page load pe check karo ki already submitted hai ya nahi
+if (sessionStorage.getItem("formSubmitted") === "true") {
+  document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden"; // Scroll disable
+}
+
+// Question form submit
+questionForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Agar pehle hi submit ho chuka hai
+  if (sessionStorage.getItem("formSubmitted") === "true") {
+    document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Validation: sab answer bhare hue hon
+  for (let q of allQuestions) {
+    const input = q.querySelector('input');
+    if (!input.value.trim()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+  }
+
+  // Loader show
+  statusMessage.innerHTML = `<div class="loader"></div> Processing... Please wait`;
+  statusMessage.className = "message processing";
+  statusMessage.classList.remove('hidden');
+
+  const formData = new FormData(questionForm);
+  fetch(questionForm.action, { method: 'POST', body: formData })
+    .then(() => {
+      statusMessage.textContent = "✅ Successfully Submitted!";
+      statusMessage.className = "message success";
+      sessionStorage.setItem("formSubmitted", "true"); // ✅ Set flag
+    })
+    .catch(() => {
+      statusMessage.textContent = "❌ Something went wrong. Please try again.";
+      statusMessage.className = "message";
+    });
+});
+
+
+  </script>
+
+       
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

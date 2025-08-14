@@ -1,0 +1,457 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ProCourseify">
+        <title>ProCourseify</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/apexcharts.css" rel="stylesheet">
+        <link href="css/procourseify.css" rel="stylesheet">
+        <style>
+          
+
+            
+    
+    /* Loader animation */
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Message styles */
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .processing {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+            
+            .hidden { display: none; }
+            .form-section input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            .question-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Full screen blur + dark overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Message box style */
+.overlay-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+
+        </style>
+    </head>
+    <body oncontextmenu="return false" onselectstart="return false"  oncopy="return false" oncut="return false" onpaste="return false">
+        <header class="navbar sticky-top flex-md-nowrap">
+            <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-box"></i>
+                    ProCourseify
+                </a>
+            </div>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="navbar-nav me-lg-2">
+                <div class="nav-item text-nowrap d-flex align-items-center">
+                    <div class="dropdown ps-3">
+                        <a class="nav-link dropdown-toggle text-center" href="#" data-bs-toggle="dropdown">
+                            <i class="bi-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                            <small>Notifications</small>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-success"><i class="notifications-icon bi-check-circle-fill"></i></div><div><span>Feel free to share your certificate on LinkedIn or social media.</span></div></a></li>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-info"><i class="notifications-icon bi-folder"></i></div><div><span>Enhance your skills now</span></div></a></li>
+                            <li class="notifications-block"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-danger"><i class="notifications-icon bi-question-circle"></i></div><div><span>Get Certificate!</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <img src="images/web logo.png" class="profile-image img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                    <div class="position-sticky py-4 px-3 sidebar-sticky">
+                        <ul class="nav flex-column h-100">
+                            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi-house-fill me-2"></i>Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="notification.html"><i class="bi-bell me-2"></i>Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="setting.html"><i class="bi-gear me-2"></i>Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="help-center.html"><i class="bi-question-circle me-2"></i>Help Center</a></li>
+                            <li class="nav-item featured-box mt-lg-5 mt-4 mb-4"><img src="images/certi.png" class="img-fluid" alt=""><a class="btn custom-btn" href="#">Certificate</a></li>
+                            <li class="nav-item border-top mt-auto pt-2"><a class="nav-link" href="#"><i class="bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">ProCourseify</h1>
+                        <small class="text-muted">welcome back!</small>
+                        <small class="text-muted">eBharat is a Government of India-recognized MSME.</small>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-lg-12 col-12">
+                            <!-- form start -->
+                            <div id="personalSection" class="form-section">
+
+                                <!-- Personal Details Form -->
+  <form id="personalForm">
+    <h2>Personal Details</h2>
+
+    <input type="hidden" name="Date" id="dateField">
+    <input type="hidden" name="Time" id="timeField">
+
+    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+    <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
+    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
+    <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
+    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
+    <div class="form-group"><label>State:</label><input name="State" required></div>
+    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
+    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
+    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
+    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <!-- Question Form -->
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbxGSSREY46o6houQxnmiovmTqsSOGV75SKU9GIadkPCBIXfVHgA4Hol8yQ7yrdexeZW/exec">
+    <!-- Hidden personal fields -->
+    <input type="hidden" name="FullName">
+    <input type="hidden" name="Mobile">
+    <input type="hidden" name="AltMobile">
+    <input type="hidden" name="Email">
+    <input type="hidden" name="AltEmail">
+    <input type="hidden" name="State">
+    <input type="hidden" name="Course">
+    <input type="hidden" name="JobRef">
+    <input type="hidden" name="InternRef">
+    <input type="hidden" name="StateRef">
+    <input type="hidden" name="Date">
+    <input type="hidden" name="Time">
+
+    <h2>Test Questions</h2>
+    <small class="text-muted">Answering all questions is mandatory.</small>
+    <div id="questionContainer"></div>
+
+    <div class="form-group">
+      <button type="button" id="nextQuestionBtn">Next</button>
+      <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    </div>
+  </form>
+
+  <!-- Status Messages -->
+  <div id="statusMessage" class="message hidden"></div>
+
+
+
+
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <footer class="site-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <p class="copyright-text">Copyright © ProCourseify 2025 - Design: <a href="https://www.procourseify.com">ProCourseify</a> __eBharat__ <span>	<a href="terms_and_conditions.html">Terms and Conditions</a></span></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        <!-- Already Submitted Overlay -->
+<div id="alreadySubmittedOverlay" class="overlay" style="display: none;">
+  <div class="overlay-message">⚠️ Data Already Submitted!</div>
+</div>
+
+
+
+
+
+        <script>
+    const personalForm = document.getElementById('personalForm');
+    const questionForm = document.getElementById('questionForm');
+    const questionContainer = document.getElementById('questionContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+  const questions = [
+  "Q1: What does AWS stand for? (A) Advanced Web Services (B) Amazon Web Services (C) Azure Web Services (D) Amazon Worldwide Servers)",
+  "Q2: Which one is a compute service in AWS? (A) Amazon S3 (B) Amazon EC2 (C) Amazon RDS (D) AWS IAM)",
+  "Q3: Which service provides scalable object storage? (A) Amazon EBS (B) Amazon S3 (C) Amazon DynamoDB (D) Amazon ElastiCache)",
+  "Q4: Which AWS service enables running code without managing servers? (A) Amazon EC2 (B) AWS Lambda (C) Amazon RDS (D) Amazon S3)",
+  "Q5: What is Amazon RDS used for? (A) NoSQL store (B) Relational databases (C) Caching (D) Object storage)",
+  "Q6: Which service provides NoSQL key-value database? (A) Amazon RDS (B) Amazon DynamoDB (C) Amazon Aurora (D) Amazon S3)",
+  "Q7: What is Amazon VPC? (A) Virtual Private Cloud (B) Virtual Public Cloud (C) Virtual Processing Cluster (D) Visual Private Console)",
+  "Q8: Which service handles DNS routing? (A) Amazon Route 53 (B) Amazon CloudFront (C) AWS IAM (D) Amazon S3)",
+  "Q9: What is CloudFront used for? (A) DNS (B) Content Delivery Network (C) Relational Database (D) Logging)",
+  "Q10: What does IAM stand for? (A) Identity and Access Management (B) Internet Access Module (C) Identity Access Module (D) Internal Access Management)",
+  "Q11: Which service orchestrates workflows? (A) AWS Step Functions (B) Amazon SNS (C) Amazon SQS (D) AWS Lambda)",
+  "Q12: Which service is used for simple message queuing? (A) Amazon SNS (B) Amazon SQS (C) Amazon SES (D) AWS IAM)",
+  "Q13: What is Amazon SNS? (A) Compute service (B) Notification Service (C) Storage Service (D) Monitoring Service)",
+  "Q14: Which service offers GraphQL APIs? (A) Amazon API Gateway (B) AWS AppSync (C) Amazon S3 (D) Amazon RDS)",
+  "Q15: What is AWS Elastic Beanstalk? (A) Container service (B) Managed orchestration for applications (C) Database service (D) DNS service)",
+  "Q16: Which service allows IaC using code in familiar languages? (A) AWS CloudFormation (B) AWS CDK (C) AWS Console (D) AWS CLI)",
+  "Q17: Which tool is CLI for AWS? (A) AWS Console (B) AWS CLI (C) AWS SDK (D) AWS SAM)",
+  "Q18: What is AWS SAM used for? (A) Serverless app modeling (B) DNS configuration (C) Identity management (D) Database tuning)",
+  "Q19: Which service provides managed Kubernetes? (A) Amazon EKS (B) AWS Lambda (C) Amazon ECS (D) Amazon EC2)",
+  "Q20: Which service runs containers serverlessly? (A) AWS Fargate (B) Amazon EC2 (C) AWS Lambda (D) AWS Batch)",
+  "Q21: Which AWS service is used for in-memory caching? (A) Amazon ElastiCache (B) Amazon S3 (C) Amazon RDS (D) Amazon EC2)",
+  "Q22: Which caching engines does ElastiCache support? (A) Redis & Memcached (B) DynamoDB only (C) S3 only (D) MongoDB)",
+  "Q23: What is the name of AWS's analytics BI tool? (A) QuickSight (B) CloudWatch (C) Athena (D) EMR)",
+  "Q24: Which service helps run serverless queries over S3? (A) Redshift (B) Athena (C) RDS (D) DynamoDB)",
+  "Q25: Which service is AWS’s managed data warehouse? (A) Athena (B) Redshift (C) RDS (D) DynamoDB)",
+  "Q26: Which service uses Graviton4 processors now? (A) S3 (B) EC2 M8g/C8g/R8g instances (C) Lambda (D) DynamoDB)",
+  "Q27: What is Amazon Bedrock used for? (A) Object storage (B) Generative AI platform (C) DNS (D) Compute instances)",
+  "Q28: What feature reduces prompt costs in Bedrock by ~90%? (A) Prompt caching (B) Model tuning (C) Data caching (D) Request bundling)",
+  "Q29: Which AWS service uses JIT AI assistance in IDEs? (A) AWS CodeDeploy (B) Amazon Q Developer (C) Cloud9 (D) AWS CLI)",
+  "Q30: Which service enables real-time APIs with WebSockets? (A) API Gateway REST (B) AWS AppSync Events (C) Amazon SQS (D) API Gateway HTTP)",
+  "Q31: What is S3 Vectors designed for? (A) DNS (B) Native vector storage for AI (C) Caching (D) Monitoring)",
+  "Q32: Which service automates ML model workflows? (A) SageMaker AI (B) API Gateway (C) Route 53 (D) CloudFront)",
+  "Q33: Which service offers hyper-efficient AI model training? (A) SageMaker AI with DeepSeek-R1 (B) Lambda (C) DynamoDB (D) S3)",
+  "Q34: What is Amazon Q Business Suite (QBS)? (A) Dashboard only (B) Unified AI/BI workspace (C) AI chatbot only (D) DNS tool)",
+  "Q35: Which AWS service helps with carbon footprint tracking? (A) Sustainability Hub (conceptual) (B) IAM (C) S3 (D) EC2)",
+  "Q36: Which EC2 CPU offers up to 40% faster performance for databases? (A) Intel Xeon (B) Graviton4 (C) Graviton3 (D) AMD)",
+  "Q37: Which AWS region is set to launch by end of 2025? (A) Central Mexico (B) Canada (C) Japan (D) Brazil)",
+  "Q38: How many availability zones did AWS have as of Feb 2025? (A) 36 (B) 114 (C) 50 (D) 200)",
+  "Q39: Which service enhances compliance posture with NIST SP 800‑171? (A) AWS WAF (B) Security Hub (C) CloudTrail (D) GuardDuty)",
+  "Q40: What AWS built-in tool monitors logs and metrics? (A) DynamoDB (B) CloudWatch (C) SageMaker (D) Lambda)",
+  "Q41: What tool helps automate cost optimization suggestions? (A) Amazon Q Developer (B) Cost Explorer (C) AWS Budgets (D) AWS Pricing Calculator)",
+  "Q42: Which service provides global database with fast switchover? (A) DynamoDB (B) Aurora Global (C) RDS MySQL (D) S3)",
+  "Q43: What feature reduces switchover time under 30 s for global DB? (A) Lambda (B) Aurora Global Database (C) DynamoDB Streams (D) RDS Read Replica)",
+  "Q44: Which service now has expanded Mumbai region for OpenSearch? (A) Athena (B) OpenSearch Serverless (C) SageMaker (D) Redshift)",
+  "Q45: Which AWS service monitors ship and alerts on anomalies? (A) GuardDuty (B) Security Hub (C) WAF (D) CloudTrail)",
+  "Q46: Which service now supports ASN matching for traffic filtering? (A) Security Hub (B) WAF (C) VPN (D) IAM)",
+  "Q47: What VPN feature adds Secrets Manager integration? (A) Site-to-Site VPN (B) Client VPN (C) Transit Gateway (D) Direct Connect)",
+  "Q48: Which new AWS AI models are available via Bedrock & SageMaker? (A) gpt-oss-120b & 20b (B) Llama only (C) Claude only (D) Gemini only)",
+  "Q49: Which service processes streaming data at scale? (A) Kinesis (B) S3 (C) DynamoDB (D) RDS)",
+  "Q50: Which service helps visually write and execute policies? (A) IAM only (B) CloudFormation Designer (C) QuickSight (D) CodeCatalyst)",
+  "Q51: Which AWS service offers managed file storage for EC2? (A) S3 (B) EFS (C) EBS (D) Glacier)",
+  "Q52: What is the purpose of EBS volumes? (A) Object storage (B) Block storage for EC2 (C) NoSQL store (D) CDN)",
+  "Q53: Which service stores archival data at low cost? (A) Glacier (B) RDS (C) DynamoDB (D) ElastiCache)",
+  "Q54: Which AWS service is for data encryption key management? (A) IAM (B) KMS (C) GuardDuty (D) WAF)",
+  "Q55: Which service protects against DDoS attacks? (A) WAF (B) Shield (C) GuardDuty (D) Firewall Manager)",
+  "Q56: Which AWS service simplifies cluster orchestration? (A) ECS (B) EKS (C) App Runner (D) All of these)",
+  "Q57: Which AWS service makes multi-account setup easier? (A) AWS Organizations (B) IAM (C) CloudWatch (D) CloudTrail)",
+  "Q58: Which service enables blueprint orchestration with IaC? (A) Cloud9 (B) CloudFormation (C) Elastic Beanstalk (D) App Runner)",
+  "Q59: Which IDE runs in browser provided by AWS? (A) Cloud9 (B) CodeCatalyst (C) Visual Studio (D) IntelliJ)",
+  "Q60: Which new AI assistant integrates with IDEs and CLI? (A) Amazon Q Developer (B) Virual Studio Code (C) IntelliSense (D) Cloud9)",
+  "Q61: What is AWS Greengrass used for? (A) Edge computing (B) CDN (C) IAM (D) Relational DB)",
+  "Q62: Which IoT hub enables device communication over MQTT/HTTPS? (A) AWS IoT Core (B) IoT Edge (C) IoT Hub (D) Greengrass only)",
+  "Q63: Which service enables low-latency web delivery? (A) CloudFront (B) Route 53 (C) S3 (D) API Gateway)",
+  "Q64: What is Amazon Aurora? (A) NoSQL DB (B) High-performance relational DB compatible with MySQL/PostgreSQL (C) Cache (D) Storage)",
+  "Q65: Which service offers petabyte-scale analytics with SQL? (A) Redshift (B) Athena (C) RDS (D) DynamoDB)",
+  "Q66: Which tool lets you define infrastructure in Python/TS/etc.? (A) CloudFormation (B) AWS CDK (C) SAM (D) CLI)",
+  "Q67: Which AWS feature integrates energy-efficient ARM instances? (A) Eco Tier (conceptual) (B) Graviton4 (C) Aurora (D) Lambda)",
+  "Q68: Which feature reduces inference latency by up to 85% in generative AI? (A) Prompt caching (B) Auto-Scaling (C) IAM Roles (D) Graviton4)",
+  "Q69: Which AWS service manages secrets? (A) IAM (B) Secrets Manager (C) KMS (D) CloudTrail)",
+  "Q70: Which AWS service centralizes event logs audit? (A) CloudFront (B) CloudTrail (C) CloudWatch (D) S3)",
+  "Q71: Which AWS service offers unified BI & generative AI workspace? (A) QuickSight only (B) Q Business Suite (QBS) (C) Bedrock (D) SageMaker)",
+  "Q72: Which AWS service provides auto-scaling compute for containers? (A) Fargate (B) EC2 (C) Lambda (D) Beanstalk)",
+  "Q73: Which AWS feature helps monitor AI agents? (A) CloudWatch (B) Bedrock AgentCore (C) SageMaker Debugger (D) Inspector)",
+  "Q74: Which AWS service offers image/video analysis? (A) Rekognition (B) SageMaker (C) DynamoDB (D) S3)",
+  "Q75: Which AWS service converts text-to-speech? (A) Lex (B) Polly (C) Translate (D) Comprehend)",
+  "Q76: Which AWS service builds chatbots? (A) Lex (B) Q Developer (C) Polly (D) Bedrock)",
+  "Q77: Which service offers fully managed data streams? (A) Kinesis (B) SQS (C) SNS (D) EventBridge)",
+  "Q78: Which service routes API requests to Lambda? (A) API Gateway (B) CloudFront (C) Route 53 (D) ELB)",
+  "Q79: Which service orchestrates microservices workflows? (A) Step Functions (B) Lambda (C) EKS (D) ECS)",
+  "Q80: Which AWS service is used for metrics dashboards? (A) CloudTrail (B) CloudWatch (C) QuickSight (D) EventBridge)",
+  "Q81: Which AWS service secures web apps from common exploits? (A) GuardDuty (B) WAF (C) Shield (D) Inspector)",
+  "Q82: Which managed service runs Jupyter notebooks at scale? (A) SageMaker Studio (B) Athena (C) Bedrock (D) Lambda)",
+  "Q83: Which service offers Pay‑as‑you‑go virtual servers? (A) Lambda (B) EC2 (C) ECS (D) App Runner)",
+  "Q84: Which AWS service enables global serverless APIs? (A) CloudFront (B) API Gateway (C) S3 (D) IAM)",
+  "Q85: Which AWS service helps manage IAM at scale? (A) IAM Users (B) IAM Identity Center Pro (conceptual) (C) Security Hub (D) AWS Organizations)",
+  "Q86: Which AWS service protects websites from regional server issues? (A) CloudFront (B) WAF (C) Route 53 Health Checks (D) Bastion Host)",
+  "Q87: Which service runs containers with full orchestration? (A) ECS (B) EC2 (C) App Runner (D) Lambda)",
+  "Q88: Which service provides private Git repos integrated with CI? (A) CodeGuru (B) CodeCatalyst (C) CodeCommit (D) CodeDeploy)",
+  "Q89: What does AWS Shield protect against? (A) SQL injection (B) DDoS attacks (C) Phishing (D) Malware)",
+  "Q90: Which service is used for infrastructure cost analysis? (A) Cost Explorer (B) CloudWatch (C) QuickSight (D) SageMaker)",
+  "Q91: What AI capability helps with CloudTrail log queries? (A) Bedrock (B) generative AI tool (C) SageMaker (D) CloudWatch)",
+  "Q92: Which AWS service is ideal for low-latency edge compute? (A) Greengrass (B) Lambda (C) EC2 (D) CloudFront)",
+  "Q93: Which AWS service allows multi-language model training? (A) Bedrock (B) SageMaker AI (C) both (D) none)",
+  "Q94: Which feature routes prompts to different models within Bedrock? (A) Prompt routing (B) Intelligent Prompt Routing (C) Model switching (D) API Gateway)",
+  "Q95: What is AWS’s global infrastructure count as of Feb 2025? (A) 114 AZs in 36 regions (B) 50 AZs in 20 regions (C) 200 AZs in 50 regions (D) 80 AZs in 30 regions)",
+  "Q96: What CPU architecture provides energy-efficient performance? (A) Graviton4 (B) Intel (C) AMD (D) Graviton3)",
+  "Q97: Which AWS tool provides developer workspace in browser? (A) Cloud9 (B) QBS (C) CodeCatalyst (D) App Runner)",
+  "Q98: Which AWS service offers endpoint health checks with DNS failover? (A) CloudWatch (B) Route 53 (C) WAF (D) Shield)",
+  "Q99: Which AWS feature launched OpenAI's gpt‑oss models availability? (A) Bedrock & SageMaker (B) API Gateway (C) Lambda (D) QuickSight)",
+  "Q100: Which service allows model distillation in Bedrock? (A) SageMaker (B) Bedrock Data Automation (C) RDS (D) Lambda)"
+];
+
+    let currentQuestion = 0;
+
+    // Fill Date & Time
+    const now = new Date();
+    document.getElementById('dateField').value = now.toLocaleDateString();
+    document.getElementById('timeField').value = now.toLocaleTimeString();
+
+    // Create questions
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('form-group', 'question');
+      if (i !== 0) div.classList.add('hidden');
+      div.innerHTML = `<label>${q}</label><input type="text" name="Q${i + 1}">`;
+      questionContainer.appendChild(div);
+    });
+
+    const allQuestions = document.querySelectorAll('.question');
+
+    personalForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = personalForm.elements;
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+          const field = questionForm.querySelector(`[name="${inputs[i].name}"]`);
+          if (field) field.value = inputs[i].value;
+        }
+      }
+      personalForm.classList.add('hidden');
+      questionForm.classList.remove('hidden');
+    });
+
+nextBtn.addEventListener('click', function () {
+  // Validation: Check current question answer is not empty
+  const currentInput = allQuestions[currentQuestion].querySelector('input');
+  if (!currentInput.value.trim()) {
+    alert("Please answer this question before proceeding.");
+    return; // Stop execution, don't move to next question
+  }
+
+  if (currentQuestion < allQuestions.length - 1) {
+    allQuestions[currentQuestion].classList.add('hidden');
+    currentQuestion++;
+    allQuestions[currentQuestion].classList.remove('hidden');
+    if (currentQuestion === allQuestions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    }
+  }
+});
+
+
+    // Page load pe check karo ki already submitted hai ya nahi
+if (sessionStorage.getItem("formSubmitted") === "true") {
+  document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden"; // Scroll disable
+}
+
+// Question form submit
+questionForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Agar pehle hi submit ho chuka hai
+  if (sessionStorage.getItem("formSubmitted") === "true") {
+    document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Validation: sab answer bhare hue hon
+  for (let q of allQuestions) {
+    const input = q.querySelector('input');
+    if (!input.value.trim()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+  }
+
+  // Loader show
+  statusMessage.innerHTML = `<div class="loader"></div> Processing... Please wait`;
+  statusMessage.className = "message processing";
+  statusMessage.classList.remove('hidden');
+
+  const formData = new FormData(questionForm);
+  fetch(questionForm.action, { method: 'POST', body: formData })
+    .then(() => {
+      statusMessage.textContent = "✅ Successfully Submitted!";
+      statusMessage.className = "message success";
+      sessionStorage.setItem("formSubmitted", "true"); // ✅ Set flag
+    })
+    .catch(() => {
+      statusMessage.textContent = "❌ Something went wrong. Please try again.";
+      statusMessage.className = "message";
+    });
+});
+
+
+  </script>
+
+       
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

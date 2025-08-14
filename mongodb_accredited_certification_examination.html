@@ -1,0 +1,457 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ProCourseify">
+        <title>ProCourseify</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/apexcharts.css" rel="stylesheet">
+        <link href="css/procourseify.css" rel="stylesheet">
+        <style>
+          
+
+            
+    
+    /* Loader animation */
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Message styles */
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .processing {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+            
+            .hidden { display: none; }
+            .form-section input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            .question-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Full screen blur + dark overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Message box style */
+.overlay-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+
+        </style>
+    </head>
+    <body oncontextmenu="return false" onselectstart="return false"  oncopy="return false" oncut="return false" onpaste="return false">
+        <header class="navbar sticky-top flex-md-nowrap">
+            <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-box"></i>
+                    ProCourseify
+                </a>
+            </div>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="navbar-nav me-lg-2">
+                <div class="nav-item text-nowrap d-flex align-items-center">
+                    <div class="dropdown ps-3">
+                        <a class="nav-link dropdown-toggle text-center" href="#" data-bs-toggle="dropdown">
+                            <i class="bi-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                            <small>Notifications</small>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-success"><i class="notifications-icon bi-check-circle-fill"></i></div><div><span>Feel free to share your certificate on LinkedIn or social media.</span></div></a></li>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-info"><i class="notifications-icon bi-folder"></i></div><div><span>Enhance your skills now</span></div></a></li>
+                            <li class="notifications-block"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-danger"><i class="notifications-icon bi-question-circle"></i></div><div><span>Get Certificate!</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <img src="images/web logo.png" class="profile-image img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                    <div class="position-sticky py-4 px-3 sidebar-sticky">
+                        <ul class="nav flex-column h-100">
+                            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi-house-fill me-2"></i>Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="notification.html"><i class="bi-bell me-2"></i>Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="setting.html"><i class="bi-gear me-2"></i>Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="help-center.html"><i class="bi-question-circle me-2"></i>Help Center</a></li>
+                            <li class="nav-item featured-box mt-lg-5 mt-4 mb-4"><img src="images/certi.png" class="img-fluid" alt=""><a class="btn custom-btn" href="#">Certificate</a></li>
+                            <li class="nav-item border-top mt-auto pt-2"><a class="nav-link" href="#"><i class="bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">ProCourseify</h1>
+                        <small class="text-muted">welcome back!</small>
+                        <small class="text-muted">eBharat is a Government of India-recognized MSME.</small>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-lg-12 col-12">
+                            <!-- form start -->
+                            <div id="personalSection" class="form-section">
+
+                                <!-- Personal Details Form -->
+  <form id="personalForm">
+    <h2>Personal Details</h2>
+
+    <input type="hidden" name="Date" id="dateField">
+    <input type="hidden" name="Time" id="timeField">
+
+    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+    <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
+    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
+    <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
+    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
+    <div class="form-group"><label>State:</label><input name="State" required></div>
+    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
+    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
+    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
+    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <!-- Question Form -->
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbyWsC2z9ep-sRyYxuJEbKNn8YCN8qJ7YJuEExnGrrBgfs-5SGhxIIMLsLv9O1uoLFCC/exec">
+    <!-- Hidden personal fields -->
+    <input type="hidden" name="FullName">
+    <input type="hidden" name="Mobile">
+    <input type="hidden" name="AltMobile">
+    <input type="hidden" name="Email">
+    <input type="hidden" name="AltEmail">
+    <input type="hidden" name="State">
+    <input type="hidden" name="Course">
+    <input type="hidden" name="JobRef">
+    <input type="hidden" name="InternRef">
+    <input type="hidden" name="StateRef">
+    <input type="hidden" name="Date">
+    <input type="hidden" name="Time">
+
+    <h2>Test Questions</h2>
+    <small class="text-muted">Answering all questions is mandatory.</small>
+    <div id="questionContainer"></div>
+
+    <div class="form-group">
+      <button type="button" id="nextQuestionBtn">Next</button>
+      <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    </div>
+  </form>
+
+  <!-- Status Messages -->
+  <div id="statusMessage" class="message hidden"></div>
+
+
+
+
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <footer class="site-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <p class="copyright-text">Copyright © ProCourseify 2025 - Design: <a href="https://www.procourseify.com">ProCourseify</a> __eBharat__ <span>	<a href="terms_and_conditions.html">Terms and Conditions</a></span></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        <!-- Already Submitted Overlay -->
+<div id="alreadySubmittedOverlay" class="overlay" style="display: none;">
+  <div class="overlay-message">⚠️ Data Already Submitted!</div>
+</div>
+
+
+
+
+
+        <script>
+    const personalForm = document.getElementById('personalForm');
+    const questionForm = document.getElementById('questionForm');
+    const questionContainer = document.getElementById('questionContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+  const questions = [
+  "Q1: What type of database is MongoDB? (A) Relational (B) Document‑oriented NoSQL (C) Graph (D) Key‑Value)",
+  "Q2: Which company develops MongoDB? (A) Oracle (B) MongoDB Inc. (C) Google (D) Microsoft)",
+  "Q3: In which year was MongoDB first released? (A) 2009 (B) 2010 (C) 2012 (D) 2015)",
+  "Q4: What license does MongoDB use? (A) MIT (B) AGPL (C) SSPL (D) Apache)",
+  "Q5: What format does MongoDB use for data storage? (A) XML (B) BSON (C) JSON (D) CSV)",
+  "Q6: Which term refers to grouping of MongoDB documents? (A) Table (B) Collection (C) Row (D) Bucket)",
+  "Q7: Which command switches to a database? (A) use (B) switch (C) db (D) connect)",
+  "Q8: How do you insert a document? (A) insertOne (B) addOne (C) createOne (D) putOne)",
+  "Q9: How do you find documents? (A) db.find() (B) findAll() (C) db.collection.find() (D) search())",
+  "Q10: How do you update a document? (A) updateOne (B) modifyOne (C) setOne (D) editOne)",
+  "Q11: Which query operator checks greater than? (A) $lt (B) $gt (C) $eq (D) $neq)",
+  "Q12: Which operator matches any in array? (A) $all (B) $in (C) $any (D) $elemMatch)",
+  "Q13: How to remove a document? (A) deleteOne (B) removeOne (C) dropOne (D) delete())",
+  "Q14: Which index improves query speed? (A) B‑tree (B) Hash (C) Index (D) Collection Index)",
+  "Q15: Which provides full-text search? (A) text index (B) search index (C) textSearch (D) fullIndex)",
+  "Q16: Which feature supports ACID transactions? (A) Single document only (B) Multi‑document with replica sets (C) Not supported (D) Only sharded clusters)",
+  "Q17: Which driver language is supported officially? (A) Python (B) Node.js (C) Java (D) All of these)",
+  "Q18: Which command starts MongoDB shell? (A) mongo (B) mongod (C) mongosh (D) dbshell)",
+  "Q19: Which component handles data storage? (A) mongod (B) mongos (C) mongo (D) mongoc)",
+  "Q20: What is mongos used for? (A) Sharding proxy (B) Data storage (C) Backup (D) Monitoring)",
+  "Q21: What version of MongoDB was released October 2024? (A) 7.0 (B) 8.0 (C) 6.0 (D) 5.0)",
+  "Q22: What is the Rapid Release after 8.0 as of mid‑2025? (A) 8.1 (B) 9.0 (C) 7.3 (D) 7.2)",
+  "Q23: Which is the stable release as of July 2025? (A) 6.0.25 (B) 7.0.22 (C) 8.0.12 (D) 8.1.2)",
+  "Q24: Which version reaches end‑of‑life around July 2025? (A) 6.0 (B) 7.0 (C) 8.0 (D) 5.0)",
+  "Q25: What is the latest build of MongoDB 8.0 as of July 17 2025? (A) 8.0.5 (B) 8.0.9 (C) 8.0.12 (D) 8.1.2)",
+  "Q26: When was MongoDB 8.0 generally available? (A) July 2025 (B) October 2024 (C) August 2023 (D) July 2022)",
+  "Q27: Which major improvement did MongoDB 8.0 include? (A) Slower writes (B) Better performance and scalability (C) Removal of transactions (D) No improvements)",
+  "Q28: Which service offers managed MongoDB? (A) MongoDB Atlas (B) Firebase (C) DynamoDB (D) RDS)",
+  "Q29: Which cloud platforms does Atlas support? (A) AWS (B) GCP (C) Azure (D) All of these)",
+  "Q30: What common vulnerability did MongoDB fix in version 6.0 prior to 6.0.23? (A) CVE-2025-6714 (B) CVE-2025-3082 (C) CVE-2025-0755 (D) CVE-2025-6709)",
+  "Q31: Which CVE affected BSON driver causing buffer overflow? (A) CVE‑2025‑6714 (B) CVE‑2025‑0755 (C) CVE‑2025‑3082 (D) CVE‑2025‑6709)",
+  "Q32: Which CVE caused denial-of-service with OIDC in versions &lt;8.0.5? (A) 6709 (B) 6710 (C) 3082 (D) 0755)",
+  "Q33: Which page tracks MongoDB end-of-life status? (A) endoflife.date (B) Wikipedia (C) MongoDB Docs (D) NVD)",
+  "Q34: Which command-line tool exports data? (A) mongodump (B) mongoexport (C) export (D) backup)",
+  "Q35: Which command restores data? (A) mongorestore (B) mongoimport (C) import (D) restore)",
+  "Q36: What command shows current database? (A) db (B) current (C) show db (D) pwd)",
+  "Q37: How to list collections? (A) show collections (B) list collections (C) show tables (D) list tables)",
+  "Q38: Which operator matches regex? (A) $match (B) $regex (C) /regex/ (D) $re)",
+  "Q39: Which data model supports time-series? (A) 5.0+ (B) 6.0+ (C) 7.0+ (D) 8.0+)",
+  "Q40: What is the primary language used to implement MongoDB? (A) JavaScript (B) C++ (C) Java (D) Python)",
+  "Q41: Which storage engine is default in modern MongoDB? (A) mmapv1 (B) WiredTiger (C) RocksDB (D) InMemory)",
+  "Q42: Which feature allows querying encrypted fields? (A) Client-Side Field Level Encryption (B) TLS (C) Kerberos (D) Password Encryption)",
+  "Q43: From which version is tiled time series and collation improvements? (A) 5.0 (B) 6.0 (C) 7.0 (D) 8.0)",
+  "Q44: What aggregation framework operator groups data? (A) $match (B) $group (C) $sort (D) $project)",
+  "Q45: How to paginate results? (A) skip() and limit() (B) page() (C) offset() (D) slice())",
+  "Q46: Which tools support MongoDB GUI? (A) Compass (B) Robo 3T (C) Studio 3T (D) All of these)",
+  "Q47: What is MongoDB Realm? (A) UI framework (B) Mobile development platform (C) Authentication service (D) Cloud storage)",
+  "Q48: Which driver may cause module not found error 'util/types'? (A) Node.js driver v6.13.0 (B) v6.12.0 (C) Java driver (D) Python driver)",
+  "Q49: Which command shows server status? (A) serverStatus() (B) db.status() (C) status() (D) monitor())",
+  "Q50: Which is default in bash shell? (A) mongo shell (B) mongosh (C) mongod (D) mongo)",
+  "Q51: What does sh.enableSharding() do? (A) Enables sharding for a DB (B) Creates index (C) Deletes Shard (D) Monitors Shard)",
+  "Q52: What is a shard key? (A) Partition key for sharding (B) Index key (C) Unique key (D) Cluster key)",
+  "Q53: Which command adds shard? (A) sh.addShard() (B) addShard() (C) shard.add() (D) sh.shardAdd())",
+  "Q54: What replicates data across nodes? (A) Replication set (B) Shard cluster (C) Single node (D) Template)",
+  "Q55: Which command initiates replica set? (A) rs.initiate() (B) repl.init() (C) initiate() (D) rs.start())",
+  "Q56: How to add members to replica? (A) rs.add() (B) addMember() (C) repl.add() (D) rs.addMember())",
+  "Q57: Which mode offers strong consistency? (A) Primary reads (B) Secondary reads (C) nearest (D) random)",
+  "Q58: Which MongoDB cloud UI improved in 2025? (A) Atlas navigation (B) Compass UI (C) shell UI (D) Cluster UI)",
+  "Q59: When was Atlas navigation redesign preview released? (A) April 2 2025 (B) Jan 1 2025 (C) July 2025 (D) Oct 2024)",
+  "Q60: Which Atlas feature helps monitor shard orphan metrics? (A) Orphan Count & Orphan Data Size (B) Shard Health (C) Replica Metrics (D) Index Stats)",
+  "Q61: What does autoCompact privilege do? (A) Enable background compaction in Atlas (B) Disable compaction (C) Compact DB manually (D) Controls backup)",
+  "Q62: Which free service offers sample data and 512 MB storage? (A) Atlas free tier (B) Atlas enterprise (C) Atlas basic (D) Atlas pro)",
+  "Q63: What type of clusters does Atlas support? (A) Dedicated and Flex (B) Only Dedicated (C) Only Flex (D) Shared only)",
+  "Q64: Which vulnerability caused stack overflow in JSON parsing &lt;8.0.5? (A) CVE‑2025‑6710 (B) 6709 (C) 6714 (D) 3082)",
+  "Q65: Which MongoDB component may crash with malformed wire protocol? (A) mongos (B) mongod (C) mongosh (D) mongo)",
+  "Q66: Which CVE affects mongos crashing from wire protocol? (A) CVE‑2025‑3083 (B) 3082 (C) 6714 (D) 0755)",
+  "Q67: Which vulnerability allowed altering collation on views? (A) CVE‑2025‑3082 (B) 3083 (C) 6710 (D) 0755)",
+  "Q68: Which version line is LTS as of mid‑2025? (A) 6.0 (B) 7.0 (C) 8.0 (D) 8.1)",
+  "Q69: Which rapid release is newest as of June 2025? (A) 8.1 (B) 8.0 (C) 7.3 (D) 7.0)",
+  "Q70: Which version introduced client‑side field level encryption? (A) 5.0 (B) 6.0 (C) 7.0 (D) 8.0)",
+  "Q71: Which command enables profiling? (A) db.setProfilingLevel() (B) db.profileEnable() (C) setProfile() (D) profiling())",
+  "Q72: What collection stores indexes? (A) system.indexes (B) system.index (C) indexes (D) sys.indexes)",
+  "Q73: Which pipeline operator transforms? (A) $project (B) $match (C) $sort (D) $group)",
+  "Q74: What data type holds binary in MongoDB? (A) BinData (B) Binary (C) Blob (D) Bytes)",
+  "Q75: What is capped collection? (A) Fixed size, circular (B) Grows dynamically (C) Indexed only (D) Encrypted collection)",
+  "Q76: Which shell replaced mongo shell? (A) mongosh (B) mongobash (C) mongo2 (D) shell++)",
+  "Q77: Which tool is used for analyzing explain output? (A) explain() (B) analyze() (C) queryPlan() (D) profile())",
+  "Q78: What does write concern w: 'majority' ensure? (A) Data replicated to majority nodes (B) Only primary (C) All nodes (D) No nodes)",
+  "Q79: Which read preference directs reads to primary? (A) primary (B) secondary (C) nearest (D) all)",
+  "Q80: Which MongoDB feature helps search within arrays? (A) $elemMatch (B) $in (C) $all (D) $array)",
+  "Q81: Which operator projects specific fields? (A) include (B) projection (C) $project (D) fields)",
+  "Q82: What does db.collection.stats() show? (A) Size and storage stats (B) Data only (C) Index only (D) Users)",
+  "Q83: Which command kills current operation? (A) db.killOp() (B) kill() (C) terminate() (D) stopOp())",
+  "Q84: Which backup method copies data at filesystem? (A) File copy (B) mongodump (C) MongoD backup (D) db.copy())",
+  "Q85: Which security feature encrypts data at-rest? (A) WiredTiger encryption (B) TLS (C) Client-side encryption (D) All of these)",
+  "Q86: Which module is required for shards? (A) sharding (B) sh (C) shard (D) none)",
+  "Q87: What is the purpose of set featureCompatibilityVersion? (A) Ensure compatibility across versions (B) Upgrade DB (C) Downgrade DB (D) Change schema)",
+  "Q88: Which HTTP interface supports REST? (A) RESTHeart (B) RESTMongo (C) REST API (D) None)",
+  "Q89: What is TTL index used for? (A) Expire documents (B) Index only (C) Sort only (D) Search only)",
+  "Q90: Which type supports geo queries? (A) 2d sphere (B) 2d (C) geoHaystack (D) All of these)",
+  "Q91: What command shows replication status? (A) rs.status() (B) repl.status() (C) status() (D) rs.info())",
+  "Q92: Which feature offers full ACID multi-document transactions? (A) Replica set only (B) Sharded cluster only (C) Both A and B (D) None)",
+  "Q93: Which utility upgrades data files? (A) mongodump (B) mongorestore (C) mongomigrate (D) mongoUpgrade())",
+  "Q94: Which driver had installation fix for 8.0.5 Windows MSI? (A) MongoDB Server (B) Node.js driver (C) Atlas (D) Compass)",
+  "Q95: What does TTL stand for? (A) Time‑to‑Live (B) Time‑to‑Load (C) Total‑to‑Log (D) Time‑to‑Last)",
+  "Q96: Which aggregation stage sorts data? (A) $sort (B) $match (C) $group (D) $project)",
+  "Q97: Which version added time series support? (A) 5.0 (B) 4.2 (C) 6.0 (D) 7.0)",
+  "Q98: Which command enables profiling level 2? (A) db.setProfilingLevel(2) (B) db.profile(2) (C) enableProfile(2) (D) profiling(2))",
+  "Q99: Which interface does Compass use? (A) GUI (B) CLI (C) API (D) Shell)",
+  "Q100: What is the latest MongoDB Rapid Release version as of July 1 2025? (A) 7.0.22 (B) 8.0.12 (C) 8.1.2 (D) 6.0.25)"
+];
+
+    let currentQuestion = 0;
+
+    // Fill Date & Time
+    const now = new Date();
+    document.getElementById('dateField').value = now.toLocaleDateString();
+    document.getElementById('timeField').value = now.toLocaleTimeString();
+
+    // Create questions
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('form-group', 'question');
+      if (i !== 0) div.classList.add('hidden');
+      div.innerHTML = `<label>${q}</label><input type="text" name="Q${i + 1}">`;
+      questionContainer.appendChild(div);
+    });
+
+    const allQuestions = document.querySelectorAll('.question');
+
+    personalForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = personalForm.elements;
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+          const field = questionForm.querySelector(`[name="${inputs[i].name}"]`);
+          if (field) field.value = inputs[i].value;
+        }
+      }
+      personalForm.classList.add('hidden');
+      questionForm.classList.remove('hidden');
+    });
+
+nextBtn.addEventListener('click', function () {
+  // Validation: Check current question answer is not empty
+  const currentInput = allQuestions[currentQuestion].querySelector('input');
+  if (!currentInput.value.trim()) {
+    alert("Please answer this question before proceeding.");
+    return; // Stop execution, don't move to next question
+  }
+
+  if (currentQuestion < allQuestions.length - 1) {
+    allQuestions[currentQuestion].classList.add('hidden');
+    currentQuestion++;
+    allQuestions[currentQuestion].classList.remove('hidden');
+    if (currentQuestion === allQuestions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    }
+  }
+});
+
+
+    // Page load pe check karo ki already submitted hai ya nahi
+if (sessionStorage.getItem("formSubmitted") === "true") {
+  document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden"; // Scroll disable
+}
+
+// Question form submit
+questionForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Agar pehle hi submit ho chuka hai
+  if (sessionStorage.getItem("formSubmitted") === "true") {
+    document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Validation: sab answer bhare hue hon
+  for (let q of allQuestions) {
+    const input = q.querySelector('input');
+    if (!input.value.trim()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+  }
+
+  // Loader show
+  statusMessage.innerHTML = `<div class="loader"></div> Processing... Please wait`;
+  statusMessage.className = "message processing";
+  statusMessage.classList.remove('hidden');
+
+  const formData = new FormData(questionForm);
+  fetch(questionForm.action, { method: 'POST', body: formData })
+    .then(() => {
+      statusMessage.textContent = "✅ Successfully Submitted!";
+      statusMessage.className = "message success";
+      sessionStorage.setItem("formSubmitted", "true"); // ✅ Set flag
+    })
+    .catch(() => {
+      statusMessage.textContent = "❌ Something went wrong. Please try again.";
+      statusMessage.className = "message";
+    });
+});
+
+
+  </script>
+
+       
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

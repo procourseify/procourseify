@@ -1,0 +1,458 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ProCourseify">
+        <title>ProCourseify</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/apexcharts.css" rel="stylesheet">
+        <link href="css/procourseify.css" rel="stylesheet">
+        <style>
+          
+
+            
+    
+    /* Loader animation */
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Message styles */
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .processing {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+            
+            .hidden { display: none; }
+            .form-section input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            .question-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Full screen blur + dark overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Message box style */
+.overlay-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+
+        </style>
+    </head>
+    <body oncontextmenu="return false" onselectstart="return false"  oncopy="return false" oncut="return false" onpaste="return false">
+        <header class="navbar sticky-top flex-md-nowrap">
+            <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-box"></i>
+                    ProCourseify
+                </a>
+            </div>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="navbar-nav me-lg-2">
+                <div class="nav-item text-nowrap d-flex align-items-center">
+                    <div class="dropdown ps-3">
+                        <a class="nav-link dropdown-toggle text-center" href="#" data-bs-toggle="dropdown">
+                            <i class="bi-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                            <small>Notifications</small>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-success"><i class="notifications-icon bi-check-circle-fill"></i></div><div><span>Feel free to share your certificate on LinkedIn or social media.</span></div></a></li>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-info"><i class="notifications-icon bi-folder"></i></div><div><span>Enhance your skills now</span></div></a></li>
+                            <li class="notifications-block"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-danger"><i class="notifications-icon bi-question-circle"></i></div><div><span>Get Certificate!</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <img src="images/web logo.png" class="profile-image img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                    <div class="position-sticky py-4 px-3 sidebar-sticky">
+                        <ul class="nav flex-column h-100">
+                            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi-house-fill me-2"></i>Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="notification.html"><i class="bi-bell me-2"></i>Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="setting.html"><i class="bi-gear me-2"></i>Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="help-center.html"><i class="bi-question-circle me-2"></i>Help Center</a></li>
+                            <li class="nav-item featured-box mt-lg-5 mt-4 mb-4"><img src="images/certi.png" class="img-fluid" alt=""><a class="btn custom-btn" href="#">Certificate</a></li>
+                            <li class="nav-item border-top mt-auto pt-2"><a class="nav-link" href="#"><i class="bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">ProCourseify</h1>
+                        <small class="text-muted">welcome back!</small>
+                        <small class="text-muted">eBharat is a Government of India-recognized MSME.</small>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-lg-12 col-12">
+                            <!-- form start -->
+                            <div id="personalSection" class="form-section">
+
+                                <!-- Personal Details Form -->
+  <form id="personalForm">
+    <h2>Personal Details</h2>
+
+    <input type="hidden" name="Date" id="dateField">
+    <input type="hidden" name="Time" id="timeField">
+
+    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+    <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
+    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
+    <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
+    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
+    <div class="form-group"><label>State:</label><input name="State" required></div>
+    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
+    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
+    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
+    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <!-- Question Form -->
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbwKIviWjEHkKqXTfwC7qWHRQyYu4q8_veOjsxTWs2u1qeC5Ig9bLSqBpMOq5QlPdR9k/exec">
+    <!-- Hidden personal fields -->
+    <input type="hidden" name="FullName">
+    <input type="hidden" name="Mobile">
+    <input type="hidden" name="AltMobile">
+    <input type="hidden" name="Email">
+    <input type="hidden" name="AltEmail">
+    <input type="hidden" name="State">
+    <input type="hidden" name="Course">
+    <input type="hidden" name="JobRef">
+    <input type="hidden" name="InternRef">
+    <input type="hidden" name="StateRef">
+    <input type="hidden" name="Date">
+    <input type="hidden" name="Time">
+
+    <h2>Test Questions</h2>
+    <small class="text-muted">Answering all questions is mandatory.</small>
+    <div id="questionContainer"></div>
+
+    <div class="form-group">
+      <button type="button" id="nextQuestionBtn">Next</button>
+      <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    </div>
+  </form>
+
+  <!-- Status Messages -->
+  <div id="statusMessage" class="message hidden"></div>
+
+
+
+
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <footer class="site-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <p class="copyright-text">Copyright © ProCourseify 2025 - Design: <a href="https://www.procourseify.com">ProCourseify</a> __eBharat__ <span>	<a href="terms_and_conditions.html">Terms and Conditions</a></span></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        <!-- Already Submitted Overlay -->
+<div id="alreadySubmittedOverlay" class="overlay" style="display: none;">
+  <div class="overlay-message">⚠️ Data Already Submitted!</div>
+</div>
+
+
+
+
+
+        <script>
+    const personalForm = document.getElementById('personalForm');
+    const questionForm = document.getElementById('questionForm');
+    const questionContainer = document.getElementById('questionContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+  const questions = [
+  "Q1: Which keyword is used to declare a variable in JavaScript? (A) var (B) let (C) const (D) all of these)",
+  "Q2: What is the default value of an uninitialized variable in JavaScript? (A) 0 (B) null (C) undefined (D) '')",
+  "Q3: Which symbol is used for single-line comments in JavaScript? (A) # (B) // (C) &lt;!-- --&gt; (D) --)",
+  "Q4: Which symbol is used for multi-line comments in JavaScript? (A) // (B) /* */ (C) &lt;!-- --&gt; (D) --)",
+  "Q5: Which method is used to display an alert box in JavaScript? (A) msg() (B) alert() (C) prompt() (D) log())",
+  "Q6: Which method is used to print output to the console? (A) print() (B) log() (C) console.log() (D) echo())",
+  "Q7: Which keyword is used to define a constant in JavaScript? (A) let (B) var (C) const (D) final)",
+  "Q8: Which operator is used for strict equality check? (A) == (B) === (C) equals (D) is)",
+  "Q9: Which data type can hold multiple values in JavaScript? (A) array (B) object (C) set (D) all of these)",
+  "Q10: What is the output type of prompt()? (A) string (B) number (C) boolean (D) object)",
+  "Q11: Which method converts a string to integer? (A) parseInt() (B) parseFloat() (C) Number() (D) all of these)",
+  "Q12: Which loop runs at least once regardless of condition? (A) for (B) while (C) do-while (D) foreach)",
+  "Q13: Which symbol is used for template literals? (A) ' ' (B) \" \" (C) ` ` (D) ~ ~)",
+  "Q14: Which operator is used for exponentiation in JavaScript? (A) ^ (B) ** (C) pow (D) exp)",
+  "Q15: Which keyword is used for asynchronous functions? (A) await (B) async (C) promise (D) defer)",
+  "Q16: Which method is used to join array elements into a string? (A) join() (B) concat() (C) merge() (D) combine())",
+  "Q17: Which method is used to add elements at the end of an array? (A) push() (B) pop() (C) shift() (D) unshift())",
+  "Q18: Which method removes the last element of an array? (A) pop() (B) push() (C) splice() (D) delete())",
+  "Q19: Which method adds elements at the beginning of an array? (A) unshift() (B) shift() (C) push() (D) insert())",
+  "Q20: Which method removes the first element of an array? (A) shift() (B) unshift() (C) pop() (D) remove())",
+  "Q21: Which keyword is used for creating a class in JavaScript? (A) object (B) class (C) function (D) constructor)",
+  "Q22: Which keyword is used to create an object from a class? (A) create (B) new (C) object (D) make)",
+  "Q23: Which method returns the length of a string? (A) length (B) size() (C) count() (D) len())",
+  "Q24: Which method is used to reverse an array? (A) reverse() (B) invert() (C) flip() (D) turn())",
+  "Q25: Which symbol is used for arrow functions? (A) -&gt; (B) =&gt; (C) &lt;- (D) =&gt;&gt;)",
+  "Q26: Which operator is used for nullish coalescing? (A) ?? (B) ?: (C) || (D) &&)",
+  "Q27: Which method is used to filter elements of an array? (A) filter() (B) map() (C) reduce() (D) select())",
+  "Q28: Which method is used to transform each element of an array? (A) map() (B) filter() (C) forEach() (D) reduce())",
+  "Q29: Which method is used to sum array values? (A) sum() (B) reduce() (C) accumulate() (D) total())",
+  "Q30: Which keyword is used for exception handling? (A) try (B) catch (C) throw (D) all of these)",
+  "Q31: Which function is used to parse JSON in JavaScript? (A) JSON.parse() (B) parseJSON() (C) toJSON() (D) JSON.stringify())",
+  "Q32: Which function is used to convert an object to JSON string? (A) JSON.parse() (B) parseJSON() (C) JSON.stringify() (D) toJSON())",
+  "Q33: Which method checks if an array includes a value? (A) contains() (B) includes() (C) has() (D) indexOf())",
+  "Q34: Which keyword is used for defining a function? (A) def (B) func (C) function (D) fun)",
+  "Q35: Which loop is used to iterate over object properties? (A) for (B) forEach (C) for...in (D) for...of)",
+  "Q36: Which loop is used to iterate over array values? (A) for (B) forEach (C) for...in (D) for...of)",
+  "Q37: Which operator is used to spread array elements? (A) ... (B) .. (C) =&gt; (D) &lt;&lt;)",
+  "Q38: Which method sorts an array? (A) sort() (B) order() (C) arrange() (D) sequence())",
+  "Q39: Which method returns a portion of an array? (A) slice() (B) splice() (C) split() (D) cut())",
+  "Q40: Which method changes array contents by removing/replacing? (A) splice() (B) slice() (C) split() (D) change())",
+  "Q41: Which function displays a confirmation box? (A) alert() (B) prompt() (C) confirm() (D) msg())",
+  "Q42: Which method checks if a variable is NaN? (A) isNaN() (B) Number.isNaN() (C) both (D) none)",
+  "Q43: Which operator is used for logical AND? (A) && (B) & (C) and (D) AND)",
+  "Q44: Which operator is used for logical OR? (A) || (B) | (C) or (D) OR)",
+  "Q45: Which operator is used for logical NOT? (A) ! (B) ~ (C) not (D) none)",
+  "Q46: Which data type is used for true/false? (A) boolean (B) bool (C) logical (D) bit)",
+  "Q47: Which type of variable is scoped to the function? (A) var (B) let (C) const (D) global)",
+  "Q48: Which method removes whitespace from both ends of a string? (A) trim() (B) strip() (C) removeSpace() (D) cut())",
+  "Q49: Which keyword is used to create an asynchronous operation? (A) async (B) await (C) promise (D) setTimeout)",
+  "Q50: Which object handles date and time in JavaScript? (A) Date (B) Time (C) Calendar (D) Clock)",
+  "Q51: Which method gets the current date and time? (A) Date.now() (B) now() (C) getDate() (D) current())",
+  "Q52: Which function executes code after a delay? (A) setInterval() (B) setTimeout() (C) delay() (D) wait())",
+  "Q53: Which function executes code repeatedly after intervals? (A) setTimeout() (B) setInterval() (C) repeat() (D) loop())",
+  "Q54: Which keyword is used to exit a loop? (A) stop (B) break (C) exit (D) end)",
+  "Q55: Which keyword skips current iteration in a loop? (A) skip (B) continue (C) next (D) pass)",
+  "Q56: Which function is used to merge arrays? (A) concat() (B) merge() (C) join() (D) combine())",
+  "Q57: Which function is used to convert string to lowercase? (A) toLowerCase() (B) lower() (C) makeLower() (D) small())",
+  "Q58: Which function is used to convert string to uppercase? (A) toUpperCase() (B) upper() (C) makeUpper() (D) big())",
+  "Q59: Which operator is used to check if a value exists in an array? (A) in (B) of (C) includes (D) has)",
+  "Q60: Which function checks the type of a variable? (A) typeof (B) instanceOf (C) is (D) type())",
+  "Q61: Which operator is used for optional chaining? (A) ?. (B) ?? (C) :: (D) ?)",
+  "Q62: Which function is used to delay async operations? (A) setTimeout() (B) wait() (C) pause() (D) delay())",
+  "Q63: Which method searches for a substring in a string? (A) search() (B) find() (C) indexOf() (D) contains())",
+  "Q64: Which function is used to generate a random number? (A) random() (B) Math.random() (C) Number.random() (D) generate())",
+  "Q65: Which operator is used to combine strings? (A) + (B) & (C) concat (D) join)",
+  "Q66: Which method is used to remove elements by index in an array? (A) splice() (B) slice() (C) cut() (D) delete())",
+  "Q67: Which method converts a number to string? (A) toString() (B) String() (C) both (D) none)",
+  "Q68: Which function is used to evaluate a string as code? (A) run() (B) eval() (C) execute() (D) code())",
+  "Q69: Which method combines array values into one value? (A) reduce() (B) join() (C) concat() (D) sum())",
+  "Q70: Which symbol is used for rest parameters? (A) ... (B) .. (C) =&gt; (D) &lt;&lt;)",
+  "Q71: Which function is used to encode a URI? (A) encodeURI() (B) encode() (C) URIencode() (D) escape())",
+  "Q72: Which function is used to decode a URI? (A) decodeURI() (B) decode() (C) URIdecode() (D) unescape())",
+  "Q73: Which operator is used for bitwise AND? (A) & (B) && (C) and (D) &&&)",
+  "Q74: Which operator is used for bitwise OR? (A) | (B) || (C) or (D) |||)",
+  "Q75: Which operator is used for bitwise NOT? (A) ~ (B) ! (C) not (D) none)",
+  "Q76: Which function is used to check if a variable is finite? (A) isFinite() (B) finite() (C) Number.isFinite() (D) both A and C)",
+  "Q77: Which method is used to get array keys? (A) keys() (B) Object.keys() (C) both (D) none)",
+  "Q78: Which method is used to get array values? (A) values() (B) Object.values() (C) both (D) none)",
+  "Q79: Which method is used to get array entries? (A) entries() (B) Object.entries() (C) both (D) none)",
+  "Q80: Which object represents mathematical constants? (A) Math (B) Number (C) Calc (D) Constants)",
+  "Q81: Which property returns the length of an array? (A) length (B) size (C) count (D) len)",
+  "Q82: Which method removes duplicate elements from an array? (A) Set (B) filter() (C) unique() (D) distinct())",
+  "Q83: Which method is used to check if a number is integer? (A) Number.isInteger() (B) isInteger() (C) integer() (D) both A and B)",
+  "Q84: Which function rounds a number to nearest integer? (A) Math.round() (B) round() (C) toFixed() (D) ceil())",
+  "Q85: Which function returns the largest number? (A) Math.max() (B) max() (C) largest() (D) big())",
+  "Q86: Which function returns the smallest number? (A) Math.min() (B) min() (C) smallest() (D) low())",
+  "Q87: Which function generates a random integer? (A) randomInt() (B) Math.floor(Math.random() * n) (C) rand() (D) integer())",
+  "Q88: Which method is used to get current timestamp? (A) Date.now() (B) now() (C) getTime() (D) timestamp())",
+  "Q89: Which method returns the first matching element in array? (A) find() (B) filter() (C) search() (D) locate())",
+  "Q90: Which method returns index of first match in array? (A) findIndex() (B) indexOf() (C) search() (D) locate())",
+  "Q91: Which method checks if all elements match condition? (A) every() (B) all() (C) forAll() (D) matchAll())",
+  "Q92: Which method checks if some elements match condition? (A) some() (B) any() (C) partial() (D) matchSome())",
+  "Q93: Which object stores key-value pairs? (A) Object (B) Map (C) Dictionary (D) both A and B)",
+  "Q94: Which object stores unique values? (A) Array (B) Set (C) Map (D) List)",
+  "Q95: Which function executes after DOM loads? (A) onload (B) DOMContentLoaded (C) ready() (D) start())",
+  "Q96: Which object represents the browser window? (A) document (B) window (C) navigator (D) screen)",
+  "Q97: Which object represents HTML document? (A) document (B) window (C) navigator (D) screen)",
+  "Q98: Which method is used to select element by ID? (A) getElementById() (B) querySelector() (C) selectById() (D) findId())",
+  "Q99: Which method is used to select elements by class name? (A) getElementsByClassName() (B) querySelectorAll() (C) selectByClass() (D) findClass())",
+  "Q100: Which method is used to select first matching CSS selector? (A) querySelector() (B) querySelectorAll() (C) getElementById() (D) getElementsByTagName())"
+];
+
+
+    let currentQuestion = 0;
+
+    // Fill Date & Time
+    const now = new Date();
+    document.getElementById('dateField').value = now.toLocaleDateString();
+    document.getElementById('timeField').value = now.toLocaleTimeString();
+
+    // Create questions
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('form-group', 'question');
+      if (i !== 0) div.classList.add('hidden');
+      div.innerHTML = `<label>${q}</label><input type="text" name="Q${i + 1}">`;
+      questionContainer.appendChild(div);
+    });
+
+    const allQuestions = document.querySelectorAll('.question');
+
+    personalForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = personalForm.elements;
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+          const field = questionForm.querySelector(`[name="${inputs[i].name}"]`);
+          if (field) field.value = inputs[i].value;
+        }
+      }
+      personalForm.classList.add('hidden');
+      questionForm.classList.remove('hidden');
+    });
+
+nextBtn.addEventListener('click', function () {
+  // Validation: Check current question answer is not empty
+  const currentInput = allQuestions[currentQuestion].querySelector('input');
+  if (!currentInput.value.trim()) {
+    alert("Please answer this question before proceeding.");
+    return; // Stop execution, don't move to next question
+  }
+
+  if (currentQuestion < allQuestions.length - 1) {
+    allQuestions[currentQuestion].classList.add('hidden');
+    currentQuestion++;
+    allQuestions[currentQuestion].classList.remove('hidden');
+    if (currentQuestion === allQuestions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    }
+  }
+});
+
+
+    // Page load pe check karo ki already submitted hai ya nahi
+if (sessionStorage.getItem("formSubmitted") === "true") {
+  document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden"; // Scroll disable
+}
+
+// Question form submit
+questionForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Agar pehle hi submit ho chuka hai
+  if (sessionStorage.getItem("formSubmitted") === "true") {
+    document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Validation: sab answer bhare hue hon
+  for (let q of allQuestions) {
+    const input = q.querySelector('input');
+    if (!input.value.trim()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+  }
+
+  // Loader show
+  statusMessage.innerHTML = `<div class="loader"></div> Processing... Please wait`;
+  statusMessage.className = "message processing";
+  statusMessage.classList.remove('hidden');
+
+  const formData = new FormData(questionForm);
+  fetch(questionForm.action, { method: 'POST', body: formData })
+    .then(() => {
+      statusMessage.textContent = "✅ Successfully Submitted!";
+      statusMessage.className = "message success";
+      sessionStorage.setItem("formSubmitted", "true"); // ✅ Set flag
+    })
+    .catch(() => {
+      statusMessage.textContent = "❌ Something went wrong. Please try again.";
+      statusMessage.className = "message";
+    });
+});
+
+
+  </script>
+
+       
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

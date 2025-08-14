@@ -1,0 +1,458 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ProCourseify">
+        <title>ProCourseify</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/apexcharts.css" rel="stylesheet">
+        <link href="css/procourseify.css" rel="stylesheet">
+        <style>
+          
+
+            
+    
+    /* Loader animation */
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Message styles */
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .processing {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+            
+            .hidden { display: none; }
+            .form-section input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            .question-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Full screen blur + dark overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Message box style */
+.overlay-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+
+        </style>
+    </head>
+    <body oncontextmenu="return false" onselectstart="return false"  oncopy="return false" oncut="return false" onpaste="return false">
+        <header class="navbar sticky-top flex-md-nowrap">
+            <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-box"></i>
+                    ProCourseify
+                </a>
+            </div>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="navbar-nav me-lg-2">
+                <div class="nav-item text-nowrap d-flex align-items-center">
+                    <div class="dropdown ps-3">
+                        <a class="nav-link dropdown-toggle text-center" href="#" data-bs-toggle="dropdown">
+                            <i class="bi-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                            <small>Notifications</small>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-success"><i class="notifications-icon bi-check-circle-fill"></i></div><div><span>Feel free to share your certificate on LinkedIn or social media.</span></div></a></li>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-info"><i class="notifications-icon bi-folder"></i></div><div><span>Enhance your skills now</span></div></a></li>
+                            <li class="notifications-block"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-danger"><i class="notifications-icon bi-question-circle"></i></div><div><span>Get Certificate!</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <img src="images/web logo.png" class="profile-image img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                    <div class="position-sticky py-4 px-3 sidebar-sticky">
+                        <ul class="nav flex-column h-100">
+                            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi-house-fill me-2"></i>Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="notification.html"><i class="bi-bell me-2"></i>Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="setting.html"><i class="bi-gear me-2"></i>Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="help-center.html"><i class="bi-question-circle me-2"></i>Help Center</a></li>
+                            <li class="nav-item featured-box mt-lg-5 mt-4 mb-4"><img src="images/certi.png" class="img-fluid" alt=""><a class="btn custom-btn" href="#">Certificate</a></li>
+                            <li class="nav-item border-top mt-auto pt-2"><a class="nav-link" href="#"><i class="bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">ProCourseify</h1>
+                        <small class="text-muted">welcome back!</small>
+                        <small class="text-muted">eBharat is a Government of India-recognized MSME.</small>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-lg-12 col-12">
+                            <!-- form start -->
+                            <div id="personalSection" class="form-section">
+
+                                <!-- Personal Details Form -->
+  <form id="personalForm">
+    <h2>Personal Details</h2>
+
+    <input type="hidden" name="Date" id="dateField">
+    <input type="hidden" name="Time" id="timeField">
+
+    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+    <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
+    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
+    <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
+    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
+    <div class="form-group"><label>State:</label><input name="State" required></div>
+    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
+    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
+    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
+    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <!-- Question Form -->
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbxHGWSZZpgpcwjJ7d_GTc_JeglTNtq_qJ81U3BwTgURxLP7uzWm5PT-JsKldjgzV--u/exec">
+    <!-- Hidden personal fields -->
+    <input type="hidden" name="FullName">
+    <input type="hidden" name="Mobile">
+    <input type="hidden" name="AltMobile">
+    <input type="hidden" name="Email">
+    <input type="hidden" name="AltEmail">
+    <input type="hidden" name="State">
+    <input type="hidden" name="Course">
+    <input type="hidden" name="JobRef">
+    <input type="hidden" name="InternRef">
+    <input type="hidden" name="StateRef">
+    <input type="hidden" name="Date">
+    <input type="hidden" name="Time">
+
+    <h2>Test Questions</h2>
+    <small class="text-muted">Answering all questions is mandatory.</small>
+    <div id="questionContainer"></div>
+
+    <div class="form-group">
+      <button type="button" id="nextQuestionBtn">Next</button>
+      <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    </div>
+  </form>
+
+  <!-- Status Messages -->
+  <div id="statusMessage" class="message hidden"></div>
+
+
+
+
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <footer class="site-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <p class="copyright-text">Copyright © ProCourseify 2025 - Design:  <a href="https://www.procourseify.com">ProCourseify</a> __eBharat__ <span>	<a href="terms_and_conditions.html">Terms and Conditions</a></span></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        <!-- Already Submitted Overlay -->
+<div id="alreadySubmittedOverlay" class="overlay" style="display: none;">
+  <div class="overlay-message">⚠️ Data Already Submitted!</div>
+</div>
+
+
+
+
+
+        <script>
+    const personalForm = document.getElementById('personalForm');
+    const questionForm = document.getElementById('questionForm');
+    const questionContainer = document.getElementById('questionContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+  const questions = [
+  "Q1: Which company developed Swift? (A) Google (B) Apple (C) Microsoft (D) IBM",
+  "Q2: What year was Swift first introduced? (A) 2012 (B) 2014 (C) 2016 (D) 2018",
+  "Q3: Swift is primarily used for which platform? (A) Android (B) iOS (C) Windows (D) Linux",
+  "Q4: What file extension does a Swift source file use? (A) .swift (B) .java (C) .kt (D) .py",
+  "Q5: Which keyword is used to declare a constant in Swift? (A) let (B) var (C) const (D) final",
+  "Q6: Which keyword is used to declare a variable in Swift? (A) let (B) var (C) val (D) define",
+  "Q7: What does 'optional' mean in Swift? (A) A variable that must have a value (B) A variable that can be nil (C) A constant (D) An immutable variable)",
+  "Q8: Which symbol is used to unwrap an optional in Swift? (A) ! (B) ? (C) * (D) &)",
+  "Q9: What is the default access level in Swift? (A) public (B) internal (C) private (D) open)",
+  "Q10: Which keyword is used to define a function in Swift? (A) func (B) function (C) def (D) method)",
+  "Q11: How do you print output in Swift? (A) println() (B) echo() (C) print() (D) log())",
+  "Q12: Which Swift statement is used for decision making? (A) if (B) when (C) switch (D) select)",
+  "Q13: How do you start a single-line comment in Swift? (A) // (B) # (C) -- (D) **)",
+  "Q14: How do you start a multi-line comment in Swift? (A) /* */ (B) /**/ (C) // // (D) &lt;&lt; &gt;&gt;)",
+  "Q15: Which Swift type represents true or false values? (A) Int (B) String (C) Bool (D) Float)",
+  "Q16: What keyword is used to define a class in Swift? (A) class (B) struct (C) object (D) type)",
+  "Q17: What keyword is used to define a structure in Swift? (A) class (B) struct (C) object (D) module)",
+  "Q18: Swift arrays are declared using which brackets? (A) [] (B) {} (C) &lt;&gt; (D) ())",
+  "Q19: Which method is used to add an element to an array in Swift? (A) append() (B) add() (C) push() (D) insert())",
+  "Q20: Which method is used to remove the last element of an array? (A) remove() (B) pop() (C) removeLast() (D) delete())",
+  "Q21: Which Swift keyword is used for inheritance? (A) extends (B) inherits (C) : (D) -&gt;)",
+  "Q22: Which Swift keyword is used to define protocols? (A) interface (B) protocol (C) abstract (D) delegate)",
+  "Q23: What does ARC stand for in Swift? (A) Automatic Reference Counting (B) Auto Resource Control (C) Apple Runtime Code (D) Application Reference Code)",
+  "Q24: What keyword is used to make a property optional? (A) ? (B) ! (C) * (D) &)",
+  "Q25: What is the default value of an uninitialized optional? (A) 0 (B) nil (C) false (D) empty)",
+  "Q26: Which loop is NOT available in Swift? (A) for-in (B) while (C) do-while (D) foreach)",
+  "Q27: Which collection type stores key-value pairs in Swift? (A) Array (B) Dictionary (C) Set (D) Tuple)",
+  "Q28: Which Swift keyword is used for error handling? (A) try (B) catch (C) throw (D) all of these)",
+  "Q29: What keyword is used before a function that can throw errors? (A) throws (B) error (C) catch (D) raise)",
+  "Q30: Which Swift statement is used to exit from a loop? (A) exit (B) stop (C) break (D) return)",
+  "Q31: Which keyword is used to skip to the next iteration in a loop? (A) skip (B) continue (C) break (D) next)",
+  "Q32: What is the Swift type for decimal numbers? (A) Int (B) Float (C) Double (D) Number)",
+  "Q33: Which function returns the number of elements in an array? (A) count (B) length (C) size (D) elements)",
+  "Q34: Which operator is used for range in Swift? (A) .. (B) ... (C) ..&lt; (D) both B and C)",
+  "Q35: Which Swift feature allows defining a blueprint for methods and properties? (A) class (B) protocol (C) extension (D) struct)",
+  "Q36: Which keyword is used to define an enum in Swift? (A) enum (B) enumeration (C) define (D) list)",
+  "Q37: How do you make a class final so it cannot be inherited? (A) noinherit (B) sealed (C) final (D) private)",
+  "Q38: Which Swift feature allows adding methods to existing classes? (A) extension (B) decorator (C) mixin (D) protocol)",
+  "Q39: Which collection type in Swift ensures unique values? (A) Array (B) Set (C) Dictionary (D) List)",
+  "Q40: Which statement is used to handle multiple cases in Swift? (A) switch (B) if-else (C) match (D) select)",
+  "Q41: Which Swift type can store multiple different types together? (A) Array (B) Tuple (C) Set (D) Dictionary)",
+  "Q42: Which keyword is used to declare lazy properties? (A) lazy (B) late (C) defer (D) wait)",
+  "Q43: Which Swift keyword is used to create closures? (A) closure (B) func (C) { } (D) lambda)",
+  "Q44: What symbol is used for optional chaining? (A) ! (B) ? (C) -&gt; (D) .?)",
+  "Q45: Which statement is used for pattern matching? (A) if (B) match (C) switch (D) select)",
+  "Q46: How do you declare a constant string in Swift? (A) let str = \"text\" (B) var str = \"text\" (C) const str = \"text\" (D) string str = \"text\")",
+  "Q47: Which Swift collection is unordered and unique? (A) Array (B) Dictionary (C) Set (D) Tuple)",
+  "Q48: Which function is used to sort an array? (A) sort() (B) sorted() (C) order() (D) arrange())",
+  "Q49: Which function is used to reverse an array? (A) reverse() (B) reversed() (C) invert() (D) back())",
+  "Q50: Which Swift loop is guaranteed to execute at least once? (A) while (B) repeat-while (C) for-in (D) foreach)",
+  "Q51: Which keyword is used to define a property that can be overridden? (A) var (B) open (C) override (D) virtual)",
+  "Q52: Which Swift keyword is used for computed properties? (A) get (B) set (C) both A and B (D) compute)",
+  "Q53: Which operator is used for nil coalescing? (A) ?? (B) ? (C) ! (D) ||)",
+  "Q54: Which Swift statement is used to throw an error? (A) throw (B) raise (C) error (D) exception)",
+  "Q55: Which Swift feature supports multiple initializers? (A) class (B) struct (C) init overloading (D) constructor chaining)",
+  "Q56: What is the default value for Boolean in Swift? (A) true (B) false (C) nil (D) 0)",
+  "Q57: Which keyword is used to define a type alias? (A) alias (B) typedef (C) typealias (D) define)",
+  "Q58: Which Swift keyword is used for asynchronous functions? (A) async (B) await (C) defer (D) future)",
+  "Q59: Which Swift function delays execution? (A) wait() (B) delay() (C) DispatchQueue.main.asyncAfter (D) sleep())",
+  "Q60: What does 'defer' do in Swift? (A) Runs code immediately (B) Runs code at function end (C) Delays variable initialization (D) Cancels execution)",
+  "Q61: Which Swift statement is used for loop iteration over a collection? (A) for-in (B) foreach (C) loop (D) iterate)",
+  "Q62: Which Swift keyword is used for value types? (A) struct (B) class (C) protocol (D) enum)",
+  "Q63: Which Swift keyword is used for reference types? (A) struct (B) class (C) protocol (D) enum)",
+  "Q64: Which Swift feature can store nil values safely? (A) Optional (B) Variable (C) Constant (D) Closure)",
+  "Q65: Which function is used to check if an array contains an element? (A) has() (B) includes() (C) contains() (D) find())",
+  "Q66: Which function is used to remove an element by index? (A) removeAt() (B) remove(at:) (C) delete() (D) pop())",
+  "Q67: Which Swift keyword is used to indicate mutability in structs? (A) var (B) mutating (C) let (D) change)",
+  "Q68: Which keyword is used to make a method abstract in Swift? (A) abstract (B) required (C) protocol requirement (D) None)",
+  "Q69: Which keyword is used for subclassing? (A) inherit (B) subclass (C) : (D) extend)",
+  "Q70: Which operator is used for type casting in Swift? (A) as (B) is (C) instanceof (D) cast)",
+  "Q71: Which Swift keyword prevents modification after initialization? (A) let (B) var (C) const (D) final)",
+  "Q72: Which keyword is used to call the parent class initializer? (A) super (B) base (C) parent (D) this)",
+  "Q73: Which Swift keyword is used for static properties? (A) static (B) const (C) class (D) fixed)",
+  "Q74: Which Swift keyword allows creating class-level properties? (A) static (B) const (C) shared (D) singleton)",
+  "Q75: Which Swift keyword is used for read-only computed properties? (A) get (B) set (C) read (D) readonly)",
+  "Q76: Which Swift function is called when an object is destroyed? (A) deinit (B) destructor (C) delete (D) remove)",
+  "Q77: Which Swift feature allows safe handling of missing values? (A) Optional (B) nil handling (C) Null check (D) Safe unwrap)",
+  "Q78: Which Swift statement is used for iteration with conditions? (A) for-in (B) while (C) repeat-while (D) all of these)",
+  "Q79: Which Swift feature is used for grouping related values? (A) Tuple (B) Array (C) Set (D) Dictionary)",
+  "Q80: Which Swift keyword creates a closure that captures variables? (A) closure (B) lambda (C) { } (D) capture)",
+  "Q81: Which Swift statement handles exceptions? (A) try-catch (B) do-catch (C) error handling (D) throw-catch)",
+  "Q82: Which Swift loop uses an index range? (A) for-in (B) for-index (C) while (D) foreach)",
+  "Q83: Which Swift operator is used for type checking? (A) as (B) is (C) == (D) instanceof)",
+  "Q84: Which Swift statement stops a function immediately? (A) stop (B) break (C) return (D) exit)",
+  "Q85: Which Swift keyword makes a method available to subclasses? (A) open (B) public (C) internal (D) final)",
+  "Q86: Which Swift keyword is used for computed properties with no setter? (A) get (B) read (C) computed (D) fixed)",
+  "Q87: Which Swift function joins array elements into a string? (A) join() (B) joined() (C) concat() (D) merge())",
+  "Q88: Which function splits a string into an array? (A) split() (B) components(separatedBy:) (C) break() (D) explode())",
+  "Q89: Which Swift statement defines type-safe enumerations? (A) enum (B) enumeration (C) define (D) list)",
+  "Q90: Which Swift feature allows default method implementations in protocols? (A) protocol extension (B) abstract method (C) class extension (D) struct extension)",
+  "Q91: Which Swift function executes code after a delay? (A) delay() (B) DispatchQueue.main.asyncAfter (C) wait() (D) timer())",
+  "Q92: Which keyword is used for property observers? (A) willSet/didSet (B) before/after (C) onChange (D) observe)",
+  "Q93: Which Swift operator is used for remainder? (A) % (B) mod (C) rem (D) div)",
+  "Q94: Which Swift keyword is used for overriding methods? (A) override (B) extends (C) implements (D) replace)",
+  "Q95: Which Swift type is used for text? (A) String (B) Text (C) CharSequence (D) str)",
+  "Q96: Which Swift keyword is used for asynchronous error handling? (A) try? (B) try! (C) both A and B (D) throw)",
+  "Q97: Which Swift function checks if a dictionary contains a key? (A) contains() (B) hasKey() (C) keys.contains() (D) exists())",
+  "Q98: Which Swift function merges two arrays? (A) merge() (B) + operator (C) append() (D) combine())",
+  "Q99: Which Swift keyword is used for making an initializer required in subclasses? (A) must (B) required (C) override (D) final)",
+  "Q100: Which Swift keyword is used to create a type that can be subclassed outside its module? (A) open (B) public (C) internal (D) final)"
+];
+
+
+    let currentQuestion = 0;
+
+    // Fill Date & Time
+    const now = new Date();
+    document.getElementById('dateField').value = now.toLocaleDateString();
+    document.getElementById('timeField').value = now.toLocaleTimeString();
+
+    // Create questions
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('form-group', 'question');
+      if (i !== 0) div.classList.add('hidden');
+      div.innerHTML = `<label>${q}</label><input type="text" name="Q${i + 1}">`;
+      questionContainer.appendChild(div);
+    });
+
+    const allQuestions = document.querySelectorAll('.question');
+
+    personalForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = personalForm.elements;
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+          const field = questionForm.querySelector(`[name="${inputs[i].name}"]`);
+          if (field) field.value = inputs[i].value;
+        }
+      }
+      personalForm.classList.add('hidden');
+      questionForm.classList.remove('hidden');
+    });
+
+nextBtn.addEventListener('click', function () {
+  // Validation: Check current question answer is not empty
+  const currentInput = allQuestions[currentQuestion].querySelector('input');
+  if (!currentInput.value.trim()) {
+    alert("Please answer this question before proceeding.");
+    return; // Stop execution, don't move to next question
+  }
+
+  if (currentQuestion < allQuestions.length - 1) {
+    allQuestions[currentQuestion].classList.add('hidden');
+    currentQuestion++;
+    allQuestions[currentQuestion].classList.remove('hidden');
+    if (currentQuestion === allQuestions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    }
+  }
+});
+
+
+    // Page load pe check karo ki already submitted hai ya nahi
+if (sessionStorage.getItem("formSubmitted") === "true") {
+  document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden"; // Scroll disable
+}
+
+// Question form submit
+questionForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Agar pehle hi submit ho chuka hai
+  if (sessionStorage.getItem("formSubmitted") === "true") {
+    document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Validation: sab answer bhare hue hon
+  for (let q of allQuestions) {
+    const input = q.querySelector('input');
+    if (!input.value.trim()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+  }
+
+  // Loader show
+  statusMessage.innerHTML = `<div class="loader"></div> Processing... Please wait`;
+  statusMessage.className = "message processing";
+  statusMessage.classList.remove('hidden');
+
+  const formData = new FormData(questionForm);
+  fetch(questionForm.action, { method: 'POST', body: formData })
+    .then(() => {
+      statusMessage.textContent = "✅ Successfully Submitted!";
+      statusMessage.className = "message success";
+      sessionStorage.setItem("formSubmitted", "true"); // ✅ Set flag
+    })
+    .catch(() => {
+      statusMessage.textContent = "❌ Something went wrong. Please try again.";
+      statusMessage.className = "message";
+    });
+});
+
+
+  </script>
+
+       
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

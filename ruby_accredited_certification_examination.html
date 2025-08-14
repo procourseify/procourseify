@@ -1,0 +1,466 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ProCourseify">
+        <title>ProCourseify</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/apexcharts.css" rel="stylesheet">
+        <link href="css/procourseify.css" rel="stylesheet">
+        <style>
+          
+
+            
+    
+    /* Loader animation */
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Message styles */
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .processing {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+            
+            .hidden { display: none; }
+            .form-section input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            .question-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Full screen blur + dark overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Message box style */
+.overlay-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+
+        </style>
+    </head>
+    <body oncontextmenu="return false" onselectstart="return false"  oncopy="return false" oncut="return false" onpaste="return false">
+        <header class="navbar sticky-top flex-md-nowrap">
+            <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-box"></i>
+                    ProCourseify
+                </a>
+            </div>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="navbar-nav me-lg-2">
+                <div class="nav-item text-nowrap d-flex align-items-center">
+                    <div class="dropdown ps-3">
+                        <a class="nav-link dropdown-toggle text-center" href="#" data-bs-toggle="dropdown">
+                            <i class="bi-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                            <small>Notifications</small>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-success"><i class="notifications-icon bi-check-circle-fill"></i></div><div><span>Feel free to share your certificate on LinkedIn or social media.</span></div></a></li>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-info"><i class="notifications-icon bi-folder"></i></div><div><span>Enhance your skills now</span></div></a></li>
+                            <li class="notifications-block"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-danger"><i class="notifications-icon bi-question-circle"></i></div><div><span>Get Certificate!</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <img src="images/web logo.png" class="profile-image img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                    <div class="position-sticky py-4 px-3 sidebar-sticky">
+                        <ul class="nav flex-column h-100">
+                            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi-house-fill me-2"></i>Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="notification.html"><i class="bi-bell me-2"></i>Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="setting.html"><i class="bi-gear me-2"></i>Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="help-center.html"><i class="bi-question-circle me-2"></i>Help Center</a></li>
+                            <li class="nav-item featured-box mt-lg-5 mt-4 mb-4"><img src="images/certi.png" class="img-fluid" alt=""><a class="btn custom-btn" href="#">Certificate</a></li>
+                            <li class="nav-item border-top mt-auto pt-2"><a class="nav-link" href="#"><i class="bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">ProCourseify</h1>
+                        <small class="text-muted">welcome back!</small>
+                        <small class="text-muted">eBharat is a Government of India-recognized MSME.</small>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-lg-12 col-12">
+                            <!-- form start -->
+                            <div id="personalSection" class="form-section">
+
+                                <!-- Personal Details Form -->
+  <form id="personalForm">
+    <h2>Personal Details</h2>
+
+    <input type="hidden" name="Date" id="dateField">
+    <input type="hidden" name="Time" id="timeField">
+
+    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+    <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
+    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
+    <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
+    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
+    <div class="form-group"><label>State:</label><input name="State" required></div>
+    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
+    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
+    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
+    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <!-- Question Form -->
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbzpI5W2ZtllyKn1AsBC48NZAdWqVPtKkOQxk34HskpztS1iOHVP-vCnLduOUlNMtm023A/exec">
+    <!-- Hidden personal fields -->
+    <input type="hidden" name="FullName">
+    <input type="hidden" name="Mobile">
+    <input type="hidden" name="AltMobile">
+    <input type="hidden" name="Email">
+    <input type="hidden" name="AltEmail">
+    <input type="hidden" name="State">
+    <input type="hidden" name="Course">
+    <input type="hidden" name="JobRef">
+    <input type="hidden" name="InternRef">
+    <input type="hidden" name="StateRef">
+    <input type="hidden" name="Date">
+    <input type="hidden" name="Time">
+
+    <h2>Test Questions</h2>
+    <small class="text-muted">Answering all questions is mandatory.</small>
+    <div id="questionContainer"></div>
+
+    <div class="form-group">
+      <button type="button" id="nextQuestionBtn">Next</button>
+      <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    </div>
+  </form>
+
+  <!-- Status Messages -->
+  <div id="statusMessage" class="message hidden"></div>
+
+
+
+
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <footer class="site-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <p class="copyright-text">Copyright © ProCourseify 2025 - Design: <a href="https://www.procourseify.com">ProCourseify</a> __eBharat__ <span>	<a href="terms_and_conditions.html">Terms and Conditions</a></span></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        <!-- Already Submitted Overlay -->
+<div id="alreadySubmittedOverlay" class="overlay" style="display: none;">
+  <div class="overlay-message">⚠️ Data Already Submitted!</div>
+</div>
+
+
+
+
+
+        <script>
+    const personalForm = document.getElementById('personalForm');
+    const questionForm = document.getElementById('questionForm');
+    const questionContainer = document.getElementById('questionContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+  const questions = [
+  "Q1: How do you define a variable in Ruby?\n(A) var x = 10\n(B) x = 10\n(C) let x = 10\n(D) declare x = 10",
+  "Q2: How do you define a method in Ruby?\n(A) def method_name ... end\n(B) function method_name() {}\n(C) func method_name {}\n(D) method method_name {}",
+  "Q3: How do you create an array in Ruby?\n(A) []\n(B) {}\n(C) ()\n(D) &lt;&gt;",
+  "Q4: Which symbol denotes an instance variable in Ruby?\n(A) @\n(B) $\n(C) %\n(D) &",
+  "Q5: What is the difference between 'puts' and 'print'?\n(A) puts adds newline; print does not\n(B) Both same\n(C) print adds newline; puts does not\n(D) Neither adds newline",
+  "Q6: How do you start a block in Ruby?\n(A) do ... end\n(B) { ... }\n(C) Both A and B\n(D) None",
+  "Q7: How do you write a comment in Ruby?\n(A) # comment\n(B) // comment\n(C) /* comment */\n(D) -- comment",
+  "Q8: Which method converts a string to an integer?\n(A) to_i\n(B) to_int\n(C) toInteger\n(D) parseInt",
+  "Q9: What is a symbol in Ruby?\n(A) Immutable, interned string\n(B) Variable\n(C) Method name\n(D) Keyword",
+  "Q10: How do you define a class in Ruby?\n(A) class ClassName ... end\n(B) def ClassName ... end\n(C) class: ClassName {}\n(D) function ClassName {}",
+
+  "Q11: How do you create a hash in Ruby?\n(A) {}\n(B) []\n(C) ()\n(D) &lt;&gt;",
+  "Q12: What does 'attr_accessor' do?\n(A) Creates getter and setter methods\n(B) Only getter\n(C) Only setter\n(D) Creates class methods",
+  "Q13: How do you check the class of an object?\n(A) object.class\n(B) class(object)\n(C) typeof(object)\n(D) object.type",
+  "Q14: What does '3.times { |i| puts i }' print?\n(A) 0 1 2\n(B) 1 2 3\n(C) Prints nothing\n(D) Error",
+  "Q15: How do you handle exceptions in Ruby?\n(A) begin ... rescue ... end\n(B) try ... catch\n(C) catch ... rescue\n(D) handle ... error",
+  "Q16: Difference between '==' and '==='?\n(A) '==' checks equality; '===' used in case statements\n(B) Both same\n(C) '===' stricter equality\n(D) '==' checks object identity",
+  "Q17: How do you concatenate strings?\n(A) + operator\n(B) concat method\n(C) &lt;&lt; operator\n(D) All of the above",
+  "Q18: How do you create a range?\n(A) (start..end)\n(B) [start..end]\n(C) {start..end}\n(D) &lt;start..end&gt;",
+  "Q19: How do you convert an array to string?\n(A) join\n(B) to_s\n(C) concat\n(D) convert",
+  "Q20: What is a Proc?\n(A) Object holding a block of code\n(B) A method\n(C) A class\n(D) A module",
+
+  "Q21: What keyword is used to inherit a class?\n(A) inherits\n(B) extends\n(C) &lt;\n(D) super",
+  "Q22: How do you define a constant?\n(A) const NAME\n(B) NAME = value\n(C) constant NAME\n(D) define NAME",
+  "Q23: Which method converts an integer to a string?\n(A) to_s\n(B) to_str\n(C) str()\n(D) convert",
+  "Q24: What does 'nil' represent?\n(A) False value\n(B) Zero\n(C) Nothing or null\n(D) Empty string",
+  "Q25: How do you create a new object of a class?\n(A) ClassName.new\n(B) new ClassName\n(C) ClassName.create\n(D) create ClassName",
+  "Q26: How do you check if an array includes a value?\n(A) array.include?(value)\n(B) array.contains(value)\n(C) array.has(value)\n(D) array.exists(value)",
+  "Q27: What is the default visibility of methods in Ruby?\n(A) public\n(B) private\n(C) protected\n(D) internal",
+  "Q28: How do you convert a string to uppercase?\n(A) upcase\n(B) uppercase\n(C) toUpperCase\n(D) upcase!",
+  "Q29: How do you make a method private?\n(A) private\n(B) hidden\n(C) protect\n(D) secret",
+  "Q30: How do you loop through an array?\n(A) array.each do |item| ... end\n(B) for item in array ... end\n(C) Both A and B\n(D) None",
+
+  "Q31: Which method adds an element to the end of an array?\n(A) push\n(B) append\n(C) add\n(D) insert",
+  "Q32: How do you check if a key exists in a hash?\n(A) hash.key?(key)\n(B) hash.has_key?(key)\n(C) hash.include?(key)\n(D) All of the above",
+  "Q33: How do you define a symbol?\n(A) :symbol_name\n(B) symbol_name\n(C) 'symbol_name'\n(D) $symbol_name",
+  "Q34: What is the return value of a method if no explicit return is given?\n(A) nil\n(B) last evaluated expression\n(C) true\n(D) false",
+  "Q35: How do you convert a string to a float?\n(A) to_f\n(B) to_float\n(C) float()\n(D) convert",
+  "Q36: What is a module in Ruby?\n(A) A collection of methods and constants\n(B) A class\n(C) An object\n(D) A variable",
+  "Q37: How do you include a module in a class?\n(A) include ModuleName\n(B) import ModuleName\n(C) use ModuleName\n(D) extend ModuleName",
+  "Q38: How do you get the length of an array?\n(A) array.length\n(B) array.size\n(C) Both A and B\n(D) array.count",
+  "Q39: How do you define a class method?\n(A) def self.method_name\n(B) def ClassName.method_name\n(C) Both A and B\n(D) def method_name",
+  "Q40: How do you check if an object responds to a method?\n(A) object.respond_to?(:method_name)\n(B) object.has_method?(:method_name)\n(C) object.can?(:method_name)\n(D) object.method_exists?(:method_name)",
+
+  "Q41: How do you open a file for reading?\n(A) File.open('file.txt', 'r')\n(B) File.read('file.txt')\n(C) open('file.txt', 'r')\n(D) File.load('file.txt')",
+  "Q42: How do you write to a file?\n(A) File.write('file.txt', 'content')\n(B) File.puts('file.txt', 'content')\n(C) open('file.txt', 'w') { |f| f.write('content') }\n(D) Both A and C",
+  "Q43: How do you convert a string to a symbol?\n(A) to_sym\n(B) to_symbol\n(C) symbolize\n(D) convert_to_sym",
+  "Q44: How do you check if a variable is nil?\n(A) variable.nil?\n(B) variable == nil\n(C) variable.empty?\n(D) Both A and B",
+  "Q45: How do you get all keys from a hash?\n(A) hash.keys\n(B) hash.get_keys\n(C) hash.all_keys\n(D) hash.keys()",
+  "Q46: How do you define a method with default arguments?\n(A) def method_name(arg=default)\n(B) def method_name(arg: default)\n(C) def method_name(arg &lt;- default)\n(D) def method_name(default=arg)",
+  "Q47: What does 'super' keyword do?\n(A) Calls the method of the superclass\n(B) Calls a sibling method\n(C) Calls a method in the same class\n(D) Refers to a variable",
+  "Q48: How do you freeze an object?\n(A) object.freeze\n(B) object.lock\n(C) object.seal\n(D) object.stop",
+  "Q49: How do you convert a symbol to string?\n(A) to_s\n(B) to_str\n(C) to_string\n(D) symbol_str",
+  "Q50: What does 'yield' do in a method?\n(A) Calls the associated block\n(B) Returns from method\n(C) Ends method execution\n(D) None",
+
+  "Q51: How do you create a singleton method?\n(A) def object.method_name\n(B) def method_name\n(C) def self.method_name\n(D) def ClassName.method_name",
+  "Q52: How do you define an alias for a method?\n(A) alias new_name old_name\n(B) alias_method new_name old_name\n(C) alias :new_name :old_name\n(D) Both A and C",
+  "Q53: How do you convert an integer to binary string?\n(A) to_s(2)\n(B) to_bin\n(C) binary()\n(D) to_binary",
+  "Q54: How do you create a range exclusive of end?\n(A) (start...end)\n(B) (start..end)\n(C) [start...end]\n(D) [start..end]",
+  "Q55: How do you check if a file exists?\n(A) File.exist?('file.txt')\n(B) File.exists?('file.txt')\n(C) File.found?('file.txt')\n(D) Both A and B",
+  "Q56: How do you require a library or file?\n(A) require 'library'\n(B) include 'library'\n(C) import 'library'\n(D) load 'library'",
+  "Q57: How do you get the current time?\n(A) Time.now\n(B) Time.current\n(C) current_time\n(D) Time.today",
+  "Q58: How do you convert an array to a hash?\n(A) array.to_h\n(B) array.to_hash\n(C) to_h\n(D) convert_to_hash",
+  "Q59: How do you define a lambda?\n(A) -&gt; { code }\n(B) lambda { code }\n(C) Both A and B\n(D) def lambda",
+  "Q60: How do you check the type of an object?\n(A) object.class\n(B) typeof(object)\n(C) class(object)\n(D) object.type",
+
+  "Q61: How do you create a nested array?\n(A) array = [[1,2],[3,4]]\n(B) array = [1,2],[3,4]\n(C) array = {1,2},{3,4}\n(D) array = (1,2),(3,4)",
+  "Q62: What does the 'self' keyword refer to?\n(A) Current object\n(B) Parent object\n(C) Class itself\n(D) Global object",
+  "Q63: How do you check if a string is empty?\n(A) string.empty?\n(B) string == ''\n(C) string.nil?\n(D) Both A and B",
+  "Q64: How do you convert a string to an array?\n(A) split\n(B) to_a\n(C) array()\n(D) convert_to_array",
+  "Q65: How do you reverse a string?\n(A) reverse\n(B) reversed\n(C) reverse!\n(D) Both A and C",
+  "Q66: How do you remove whitespace from both ends of a string?\n(A) strip\n(B) trim\n(C) chomp\n(D) clean",
+  "Q67: How do you check if an object is a kind of a class?\n(A) object.is_a?(ClassName)\n(B) object.kind_of?(ClassName)\n(C) Both A and B\n(D) object.instance_of?(ClassName)",
+  "Q68: How do you add a method to an existing class?\n(A) Reopen class and define method\n(B) monkey patch\n(C) Both A and B\n(D) Create subclass",
+  "Q69: How do you create a new thread?\n(A) Thread.new { ... }\n(B) thread.create { ... }\n(C) new Thread { ... }\n(D) Thread.start { ... }",
+  "Q70: How do you check the length of a string?\n(A) string.length\n(B) string.size\n(C) Both A and B\n(D) string.count",
+
+  "Q71: What is the purpose of the 'initialize' method?\n(A) Constructor\n(B) Destructor\n(C) Class method\n(D) Instance variable",
+  "Q72: How do you create a symbol from a string?\n(A) string.to_sym\n(B) to_symbol(string)\n(C) symbolize(string)\n(D) convert_to_sym(string)",
+  "Q73: How do you call a superclass method from a subclass?\n(A) super\n(B) parent.method\n(C) base.method\n(D) call.super",
+  "Q74: How do you create a frozen string?\n(A) 'string'.freeze\n(B) freeze('string')\n(C) frozen_string('string')\n(D) string.freeze!",
+  "Q75: How do you append to a string?\n(A) &lt;&lt; operator\n(B) concat method\n(C) + operator\n(D) All of the above",
+  "Q76: How do you create an empty array?\n(A) []\n(B) Array.new\n(C) Both A and B\n(D) new Array",
+  "Q77: How do you get the last element of an array?\n(A) array[-1]\n(B) array.last\n(C) array.end\n(D) Both A and B",
+  "Q78: How do you convert a string to lowercase?\n(A) downcase\n(B) lowercase\n(C) toLowerCase\n(D) downcase!",
+  "Q79: How do you remove an element from an array?\n(A) array.delete(element)\n(B) array.remove(element)\n(C) array.cut(element)\n(D) array.erase(element)",
+  "Q80: How do you create a range including the end value?\n(A) (start..end)\n(B) (start...end)\n(C) [start..end]\n(D) {start..end}",
+
+  "Q81: How do you check if a file is readable?\n(A) File.readable?('file.txt')\n(B) File.can_read?('file.txt')\n(C) File.exists?('file.txt')\n(D) File.open('file.txt', 'r')",
+  "Q82: How do you add an element to the beginning of an array?\n(A) array.unshift(element)\n(B) array.push_front(element)\n(C) array.prepend(element)\n(D) array.add_first(element)",
+  "Q83: How do you convert a string to symbol in Ruby?\n(A) string.to_sym\n(B) string.symbolize\n(C) to_symbol(string)\n(D) convert_to_symbol(string)",
+  "Q84: How do you remove whitespace from the end of a string?\n(A) chomp\n(B) strip\n(C) trim\n(D) clean",
+  "Q85: How do you check if a hash is empty?\n(A) hash.empty?\n(B) hash.nil?\n(C) hash.size == 0\n(D) Both A and C",
+  "Q86: How do you get the first element of an array?\n(A) array.first\n(B) array[0]\n(C) array.head\n(D) Both A and B",
+  "Q87: How do you sort an array?\n(A) array.sort\n(B) array.order\n(C) array.sorted\n(D) array.arrange",
+  "Q88: How do you convert a float to integer?\n(A) to_i\n(B) to_int\n(C) int()\n(D) convert_to_int",
+  "Q89: How do you delete a file?\n(A) File.delete('file.txt')\n(B) File.remove('file.txt')\n(C) File.erase('file.txt')\n(D) File.unlink('file.txt')",
+  "Q90: How do you check if a string includes a substring?\n(A) string.include?(substring)\n(B) string.contains?(substring)\n(C) string.has?(substring)\n(D) string.exists?(substring)",
+
+  "Q91: How do you iterate over a hash?\n(A) hash.each do |key, value| ... end\n(B) for key, value in hash ... end\n(C) Both A and B\n(D) None",
+  "Q92: How do you create a new instance variable?\n(A) @variable\n(B) $variable\n(C) %variable\n(D) &variable",
+  "Q93: How do you open a file for writing?\n(A) File.open('file.txt', 'w')\n(B) File.write('file.txt')\n(C) open('file.txt', 'w')\n(D) Both A and C",
+  "Q94: How do you convert a symbol to an integer?\n(A) symbol.to_i\n(B) symbol.to_int\n(C) Cannot convert directly\n(D) to_i(symbol)",
+  "Q95: How do you call a method dynamically?\n(A) send(:method_name)\n(B) call(:method_name)\n(C) invoke(:method_name)\n(D) execute(:method_name)",
+  "Q96: How do you check if a string starts with a substring?\n(A) string.start_with?(substring)\n(B) string.starts_with?(substring)\n(C) string.begins_with?(substring)\n(D) string.has_prefix?(substring)",
+  "Q97: How do you convert an array to string with a separator?\n(A) array.join(separator)\n(B) array.to_s(separator)\n(C) join(array, separator)\n(D) array.concat(separator)",
+  "Q98: How do you check if a file is readable?\n(A) File.readable?('file.txt')\n(B) File.can_read?('file.txt')\n(C) File.exists?('file.txt')\n(D) File.open('file.txt', 'r')",
+  "Q99: How do you add an element to the beginning of an array?\n(A) array.unshift(element)\n(B) array.push_front(element)\n(C) array.prepend(element)\n(D) array.add_first(element)",
+  "Q100: How do you convert a string to symbol in Ruby?\n(A) string.to_sym\n(B) string.symbolize\n(C) to_symbol(string)\n(D) convert_to_symbol(string)"
+];
+
+    let currentQuestion = 0;
+
+    // Fill Date & Time
+    const now = new Date();
+    document.getElementById('dateField').value = now.toLocaleDateString();
+    document.getElementById('timeField').value = now.toLocaleTimeString();
+
+    // Create questions
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('form-group', 'question');
+      if (i !== 0) div.classList.add('hidden');
+      div.innerHTML = `<label>${q}</label><input type="text" name="Q${i + 1}">`;
+      questionContainer.appendChild(div);
+    });
+
+    const allQuestions = document.querySelectorAll('.question');
+
+    personalForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = personalForm.elements;
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+          const field = questionForm.querySelector(`[name="${inputs[i].name}"]`);
+          if (field) field.value = inputs[i].value;
+        }
+      }
+      personalForm.classList.add('hidden');
+      questionForm.classList.remove('hidden');
+    });
+
+nextBtn.addEventListener('click', function () {
+  // Validation: Check current question answer is not empty
+  const currentInput = allQuestions[currentQuestion].querySelector('input');
+  if (!currentInput.value.trim()) {
+    alert("Please answer this question before proceeding.");
+    return; // Stop execution, don't move to next question
+  }
+
+  if (currentQuestion < allQuestions.length - 1) {
+    allQuestions[currentQuestion].classList.add('hidden');
+    currentQuestion++;
+    allQuestions[currentQuestion].classList.remove('hidden');
+    if (currentQuestion === allQuestions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    }
+  }
+});
+
+
+    // Page load pe check karo ki already submitted hai ya nahi
+if (sessionStorage.getItem("formSubmitted") === "true") {
+  document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden"; // Scroll disable
+}
+
+// Question form submit
+questionForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Agar pehle hi submit ho chuka hai
+  if (sessionStorage.getItem("formSubmitted") === "true") {
+    document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Validation: sab answer bhare hue hon
+  for (let q of allQuestions) {
+    const input = q.querySelector('input');
+    if (!input.value.trim()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+  }
+
+  // Loader show
+  statusMessage.innerHTML = `<div class="loader"></div> Processing... Please wait`;
+  statusMessage.className = "message processing";
+  statusMessage.classList.remove('hidden');
+
+  const formData = new FormData(questionForm);
+  fetch(questionForm.action, { method: 'POST', body: formData })
+    .then(() => {
+      statusMessage.textContent = "✅ Successfully Submitted!";
+      statusMessage.className = "message success";
+      sessionStorage.setItem("formSubmitted", "true"); // ✅ Set flag
+    })
+    .catch(() => {
+      statusMessage.textContent = "❌ Something went wrong. Please try again.";
+      statusMessage.className = "message";
+    });
+});
+
+
+  </script>
+
+       
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

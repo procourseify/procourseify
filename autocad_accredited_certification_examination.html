@@ -1,0 +1,458 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="ProCourseify">
+        <title>ProCourseify</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/apexcharts.css" rel="stylesheet">
+        <link href="css/procourseify.css" rel="stylesheet">
+        <style>
+          
+
+            
+    
+    /* Loader animation */
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Message styles */
+    .message {
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .processing {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+    .success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+            
+            .hidden { display: none; }
+            .form-section input { display: block; margin-bottom: 10px; width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+            .question-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        /* Full screen blur + dark overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Message box style */
+.overlay-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+
+        </style>
+    </head>
+    <body oncontextmenu="return false" onselectstart="return false"  oncopy="return false" oncut="return false" onpaste="return false">
+        <header class="navbar sticky-top flex-md-nowrap">
+            <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-box"></i>
+                    ProCourseify
+                </a>
+            </div>
+            <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0">
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+            <div class="navbar-nav me-lg-2">
+                <div class="nav-item text-nowrap d-flex align-items-center">
+                    <div class="dropdown ps-3">
+                        <a class="nav-link dropdown-toggle text-center" href="#" data-bs-toggle="dropdown">
+                            <i class="bi-bell"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end notifications-block-wrap bg-white shadow">
+                            <small>Notifications</small>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-success"><i class="notifications-icon bi-check-circle-fill"></i></div><div><span>Feel free to share your certificate on LinkedIn or social media.</span></div></a></li>
+                            <li class="notifications-block border-bottom pb-2 mb-2"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-info"><i class="notifications-icon bi-folder"></i></div><div><span>Enhance your skills now</span></div></a></li>
+                            <li class="notifications-block"><a class="dropdown-item d-flex align-items-center" href="#"><div class="notifications-icon-wrap bg-danger"><i class="notifications-icon bi-question-circle"></i></div><div><span>Get Certificate!</span></div></a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown px-3">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <img src="images/web logo.png" class="profile-image img-fluid" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                    <div class="position-sticky py-4 px-3 sidebar-sticky">
+                        <ul class="nav flex-column h-100">
+                            <li class="nav-item"><a class="nav-link active" href="index.html"><i class="bi-house-fill me-2"></i>Overview</a></li>
+                            <li class="nav-item"><a class="nav-link" href="notification.html"><i class="bi-bell me-2"></i>Notification</a></li>
+                            <li class="nav-item"><a class="nav-link" href="setting.html"><i class="bi-gear me-2"></i>Settings</a></li>
+                            <li class="nav-item"><a class="nav-link" href="help-center.html"><i class="bi-question-circle me-2"></i>Help Center</a></li>
+                            <li class="nav-item featured-box mt-lg-5 mt-4 mb-4"><img src="images/certi.png" class="img-fluid" alt=""><a class="btn custom-btn" href="#">Certificate</a></li>
+                            <li class="nav-item border-top mt-auto pt-2"><a class="nav-link" href="#"><i class="bi-box-arrow-left me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">ProCourseify</h1>
+                        <small class="text-muted">welcome back!</small>
+                        <small class="text-muted">eBharat is a Government of India-recognized MSME.</small>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-lg-12 col-12">
+                            <!-- form start -->
+                            <div id="personalSection" class="form-section">
+
+                                <!-- Personal Details Form -->
+  <form id="personalForm">
+    <h2>Personal Details</h2>
+
+    <input type="hidden" name="Date" id="dateField">
+    <input type="hidden" name="Time" id="timeField">
+
+    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+    <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
+    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
+    <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
+    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
+    <div class="form-group"><label>State:</label><input name="State" required></div>
+    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
+    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
+    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
+    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+
+    <button type="submit">Next</button>
+  </form>
+
+  <!-- Question Form -->
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbxUcXzESk1e3TIARVjiX3wUajY01ulP9e1branhkpk3JNGbT6MChzNVy4oabBIEv3EtZw/exec">
+    <!-- Hidden personal fields -->
+    <input type="hidden" name="FullName">
+    <input type="hidden" name="Mobile">
+    <input type="hidden" name="AltMobile">
+    <input type="hidden" name="Email">
+    <input type="hidden" name="AltEmail">
+    <input type="hidden" name="State">
+    <input type="hidden" name="Course">
+    <input type="hidden" name="JobRef">
+    <input type="hidden" name="InternRef">
+    <input type="hidden" name="StateRef">
+    <input type="hidden" name="Date">
+    <input type="hidden" name="Time">
+
+    <h2>Test Questions</h2>
+    <small class="text-muted">Answering all questions is mandatory.</small>
+    <div id="questionContainer"></div>
+
+    <div class="form-group">
+      <button type="button" id="nextQuestionBtn">Next</button>
+      <button type="submit" id="submitBtn" class="hidden">Submit</button>
+    </div>
+  </form>
+
+  <!-- Status Messages -->
+  <div id="statusMessage" class="message hidden"></div>
+
+
+
+
+                            </div>
+                            <!-- form end -->
+                        </div>
+                    </div>
+                    <footer class="site-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <p class="copyright-text">Copyright © ProCourseify 2025 - Design: <a href="https://www.procourseify.com">ProCourseify</a> __eBharat__ <span>	<a href="terms_and_conditions.html">Terms and Conditions</a></span></p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </main>
+            </div>
+        </div>
+
+        <!-- Already Submitted Overlay -->
+<div id="alreadySubmittedOverlay" class="overlay" style="display: none;">
+  <div class="overlay-message">⚠️ Data Already Submitted!</div>
+</div>
+
+
+
+
+
+        <script>
+    const personalForm = document.getElementById('personalForm');
+    const questionForm = document.getElementById('questionForm');
+    const questionContainer = document.getElementById('questionContainer');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+
+  const questions = [
+  "Q1: Which command is used to draw a circle in AutoCAD? (A) CIRCLE (B) CIR (C) CR (D) ARC)",
+  "Q2: Which key is used to cancel a command in AutoCAD? (A) Esc (B) Ctrl (C) Shift (D) Alt)",
+  "Q3: What is the default file extension of AutoCAD drawings? (A) .dwg (B) .cad (C) .dxf (D) .dwf)",
+  "Q4: Which command is used to draw a straight line? (A) LINE (B) L (C) LIN (D) STRAIGHT)",
+  "Q5: Which coordinate system does AutoCAD use by default? (A) Cartesian (B) Polar (C) Spherical (D) Cylindrical)",
+  "Q6: Which command is used to erase objects? (A) REMOVE (B) DELETE (C) ERASE (D) CLEAR)",
+  "Q7: Which key combination repeats the last command? (A) Enter (B) Spacebar (C) Ctrl+R (D) Both A and B)",
+  "Q8: Which command is used to draw parallel lines? (A) OFFSET (B) PARALLEL (C) COPY (D) LINE)",
+  "Q9: What is the shortcut key for the MOVE command? (A) M (B) MV (C) MO (D) MVV)",
+  "Q10: Which command is used to measure distances? (A) DIM (B) DIST (C) MEASURE (D) LEN)",
+  "Q11: Which layer is created by default in a new drawing? (A) Layer1 (B) Default (C) 0 (D) Base)",
+  "Q12: What is the shortcut for the COPY command? (A) C (B) CP (C) CO (D) COPY)",
+  "Q13: Which command changes the size of an object proportionally? (A) SCALE (B) SIZE (C) RESIZE (D) DIM)",
+  "Q14: Which command is used to join lines? (A) JOIN (B) MERGE (C) CONNECT (D) LINK)",
+  "Q15: What is the shortcut key for PAN in AutoCAD? (A) P (B) PAN (C) Hold Middle Mouse Button (D) PR)",
+  "Q16: Which command is used to mirror objects? (A) REFLECT (B) MIRROR (C) REVERSE (D) FLIP)",
+  "Q17: What is the shortcut key for the ROTATE command? (A) RO (B) RT (C) R (D) ROT)",
+  "Q18: Which command creates a rectangular shape? (A) RECT (B) REC (C) RECTANGLE (D) All of these)",
+  "Q19: What is the shortcut key for ZOOM EXTENTS? (A) ZE (B) Z (C) ZX (D) ZO)",
+  "Q20: Which command is used to trim objects? (A) CUT (B) TRIM (C) TR (D) Both B and C)",
+  "Q21: Which command extends objects to meet other objects? (A) EXTEND (B) EX (C) JOIN (D) LENGTHEN)",
+  "Q22: What is the function of the OFFSET command? (A) Create concentric shapes (B) Move objects (C) Rotate objects (D) Change layer)",
+  "Q23: Which AutoCAD version introduced dynamic blocks? (A) 2004 (B) 2006 (C) 2008 (D) 2010)",
+  "Q24: Which command converts objects into a single polyline? (A) PEDIT (B) JOIN (C) MERGE (D) POLY)",
+  "Q25: What does UCS stand for in AutoCAD? (A) User Coordinate System (B) Universal CAD System (C) Unified Control System (D) User CAD Setup)",
+  "Q26: Which command is used to save a drawing? (A) SAVE (B) S (C) WBLOCK (D) Both A and B)",
+  "Q27: What is the shortcut for switching between model and layout tabs? (A) Ctrl+Tab (B) Ctrl+M (C) Ctrl+L (D) Tab)",
+  "Q28: Which command is used to convert 2D objects to 3D? (A) EXTRUDE (B) 3DCONVERT (C) CONVERT3D (D) 3D)",
+  "Q29: Which command changes the properties of objects? (A) PROPERTIES (B) CH (C) PR (D) All of these)",
+  "Q30: What does the FILLET command do? (A) Creates a rounded corner (B) Creates a chamfer (C) Cuts objects (D) Joins lines at an angle)",
+  "Q31: Which command is used to change text height? (A) TEXT (B) STYLE (C) HEIGHT (D) CHPROP)",
+  "Q32: Which command copies properties from one object to another? (A) MATCHPROP (B) CP (C) COPYPROP (D) MATCH)",
+  "Q33: Which command changes the length of an object? (A) LENGTHEN (B) LEN (C) CHLEN (D) EXTEND)",
+  "Q34: Which command allows you to type multiple lines of text? (A) MTEXT (B) TEXT (C) MLINE (D) MULTITEXT)",
+  "Q35: What is the shortcut for drawing a polygon? (A) POL (B) POLY (C) POLYGON (D) PGN)",
+  "Q36: Which command splits an object into two? (A) BREAK (B) SPLIT (C) DIVIDE (D) CUT)",
+  "Q37: Which command measures the area of a closed object? (A) AREA (B) MEASURE (C) DIST (D) LENGTH)",
+  "Q38: Which AutoCAD command is used to hatch an area? (A) HATCH (B) H (C) FILL (D) PATTERN)",
+  "Q39: What is the function of the LAYER command? (A) Create and manage layers (B) Draw lines (C) Set coordinates (D) Scale objects)",
+  "Q40: Which command creates a parallel curve at a specific distance? (A) OFFSET (B) COPY (C) ARRAY (D) POLAR)",
+  "Q41: Which command arranges objects in a pattern? (A) ARRAY (B) ARR (C) PATTERN (D) REPEAT)",
+  "Q42: Which coordinate entry method uses distances and angles? (A) Polar (B) Cartesian (C) Relative (D) Direct)",
+  "Q43: Which command is used to stretch objects? (A) STRETCH (B) S (C) STR (D) MOVE)",
+  "Q44: Which AutoCAD object cannot have thickness? (A) Line (B) Circle (C) Text (D) Polyline)",
+  "Q45: Which command is used to import a PDF file? (A) PDFIMPORT (B) IMPORT (C) PDFFILE (D) PDFIN)",
+  "Q46: Which command reverses the last undo? (A) REDO (B) R (C) REVERSE (D) AGAIN)",
+  "Q47: Which AutoCAD file format is used for exchanging drawings? (A) .dwf (B) .dwg (C) .dxf (D) .pdf)",
+  "Q48: Which key toggles object snap on/off? (A) F3 (B) F8 (C) F9 (D) F2)",
+  "Q49: What does the ORTHO mode do? (A) Restricts cursor movement to 90 degrees (B) Snaps to objects (C) Zooms in (D) Rotates view)",
+  "Q50: Which key enables polar tracking? (A) F8 (B) F10 (C) F9 (D) F3)",
+  "Q51: Which command changes the visual style in 3D? (A) VISUALSTYLES (B) STYLE (C) 3DSTYLE (D) VIEW)",
+  "Q52: Which command converts text into polylines? (A) TXTEXP (B) EXPLODE (C) CONVERT (D) OUTLINE)",
+  "Q53: Which command creates 3D solids by revolving a 2D object? (A) REVOLVE (B) ROTATE3D (C) SWEEP (D) LOFT)",
+  "Q54: Which command creates a 3D object by sweeping a profile? (A) SWEEP (B) REVOLVE (C) EXTRUDE (D) LOFT)",
+  "Q55: Which command combines two or more 3D solids? (A) UNION (B) JOIN (C) MERGE (D) ADD)",
+  "Q56: Which command removes the volume common to two solids? (A) SUBTRACT (B) CUT (C) REMOVE (D) DIFF)",
+  "Q57: Which command displays the properties of objects? (A) PROPERTIES (B) CH (C) PR (D) All of these)",
+  "Q58: Which command creates a chamfer between two objects? (A) CHAMFER (B) BEVEL (C) EDGE (D) TRIM)",
+  "Q59: Which command is used to control the display of toolbars? (A) TOOLBAR (B) DISPLAY (C) UI (D) SHOW)",
+  "Q60: Which command saves a drawing with a new name? (A) SAVEAS (B) SAVE (C) WSAVE (D) NEW)",
+  "Q61: Which command exports AutoCAD data to other formats? (A) EXPORT (B) SAVEAS (C) CONVERT (D) OUTPUT)",
+  "Q62: Which command displays drawing statistics? (A) DWGPROPS (B) INFO (C) PROPERTIES (D) STATUS)",
+  "Q63: Which command creates a gradient fill? (A) GRADIENT (B) FILL (C) HATCH (D) COLOR)",
+  "Q64: Which command regenerates the drawing display? (A) REGEN (B) REDRAW (C) REFRESH (D) R)",
+  "Q65: Which command is used to lock a layer? (A) LAYER LOCK (B) LOCK (C) LAYLOCK (D) LAYL)",
+  "Q66: Which command is used to isolate objects? (A) ISOLATE (B) HIDE (C) OBJECTISOLATION (D) OISO)",
+  "Q67: Which command removes all unused objects like blocks, layers, and linetypes? (A) PURGE (B) CLEAN (C) REMOVE (D) DELETE)",
+  "Q68: Which command displays a list of all blocks in the drawing? (A) BLOCKS (B) LIST (C) BROWSER (D) B)",
+  "Q69: Which command creates a block from selected objects? (A) BLOCK (B) B (C) MAKEBLOCK (D) CREATE)",
+  "Q70: Which command updates all instances of a block? (A) REFRESH (B) UPDATE (C) REDEFINE (D) BLOCKUPDATE)",
+  "Q71: Which command is used to align objects? (A) ALIGN (B) MOVE (C) ROTATE (D) POSITION)",
+  "Q72: Which command is used to divide an object into equal parts? (A) DIVIDE (B) SPLIT (C) CUT (D) PARTITION)",
+  "Q73: Which command sets the current layer? (A) LAYER (B) SETLAYER (C) LAYERSET (D) CURRENT)",
+  "Q74: Which command is used to print a drawing? (A) PLOT (B) PRINT (C) PR (D) Both A and B)",
+  "Q75: Which command is used to convert a drawing to PDF? (A) EXPORTPDF (B) PLOTPDF (C) PDFEXPORT (D) CONVERTPDF)",
+  "Q76: Which command is used to create a viewport in paper space? (A) MVIEW (B) VIEWPORT (C) VP (D) CREATEVP)",
+  "Q77: Which command is used to switch between orthographic and perspective views? (A) VIEW (B) VPOINT (C) PERSPECTIVE (D) CAMERA)",
+  "Q78: Which command is used to render a 3D model? (A) RENDER (B) R (C) 3DRENDER (D) PHOTO)",
+  "Q79: Which command is used to change the drawing units? (A) UNITS (B) SETUNITS (C) U (D) OPTIONS)",
+  "Q80: Which command toggles grid display? (A) F7 (B) F8 (C) F9 (D) GRID)",
+  "Q81: Which command toggles snap mode? (A) F9 (B) F8 (C) F7 (D) SNAP)",
+  "Q82: Which command controls linetype scale? (A) LTSCALE (B) SCALE (C) LINETYPE (D) LTS)",
+  "Q83: Which command creates a leader line with annotation? (A) LEADER (B) QLEADER (C) MLEADER (D) ANNOTATE)",
+  "Q84: Which command aligns text with an object? (A) TEXTALIGN (B) ALIGNTEXT (C) TXALIGN (D) ALTXT)",
+  "Q85: Which command reverses the direction of a polyline? (A) REVERSE (B) FLIP (C) CHANGE (D) ROTATE)",
+  "Q86: Which command breaks a polyline into segments? (A) EXPLODE (B) BREAK (C) SPLIT (D) DIVIDE)",
+  "Q87: Which command creates multiple copies of an object in a circular pattern? (A) POLAR ARRAY (B) CIRCLE COPY (C) ROTATE COPY (D) RADIAL COPY)",
+  "Q88: Which command removes duplicate objects? (A) OVERKILL (B) REMOVE (C) CLEAN (D) PURGE)",
+  "Q89: Which command changes the draw order of objects? (A) DRAWORDER (B) ORDER (C) CHANGEORDER (D) BRINGFORWARD)",
+  "Q90: Which command creates a spline curve? (A) SPLINE (B) CURVE (C) S (D) POLY)",
+  "Q91: Which command converts a spline to a polyline? (A) SPLINEDIT (B) CONVERT (C) PEDIT (D) POLYCONVERT)",
+  "Q92: Which command creates text along a curve? (A) ARCTEXT (B) CURVETEXT (C) TEXTCURVE (D) TEXTPATH)",
+  "Q93: Which command allows 3D orbiting around a model? (A) 3DORBIT (B) ORBIT (C) ROTATE3D (D) VIEW3D)",
+  "Q94: Which command extrudes a shape along a path? (A) SWEEP (B) PATH (C) LOFT (D) EXTRUDEPATH)",
+  "Q95: Which command flattens 3D objects into 2D? (A) FLATTEN (B) 2DCONVERT (C) PLANAR (D) PROJECT)",
+  "Q96: Which command moves objects to a specific coordinate? (A) MOVE (B) ALIGN (C) POSITION (D) COORDMOVE)",
+  "Q97: Which command creates a section plane in 3D? (A) SECTIONPLANE (B) CUT (C) SLICE (D) PLANE)",
+  "Q98: Which command calculates mass properties of solids? (A) MASSPROP (B) PROPERTIES (C) MEASURE (D) VOLUME)",
+  "Q99: Which command toggles dynamic input? (A) F12 (B) F8 (C) F10 (D) DYNINPUT)",
+  "Q100: Which command displays the help window? (A) HELP (B) H (C) ? (D) INFO)"
+];
+
+
+    let currentQuestion = 0;
+
+    // Fill Date & Time
+    const now = new Date();
+    document.getElementById('dateField').value = now.toLocaleDateString();
+    document.getElementById('timeField').value = now.toLocaleTimeString();
+
+    // Create questions
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.classList.add('form-group', 'question');
+      if (i !== 0) div.classList.add('hidden');
+      div.innerHTML = `<label>${q}</label><input type="text" name="Q${i + 1}">`;
+      questionContainer.appendChild(div);
+    });
+
+    const allQuestions = document.querySelectorAll('.question');
+
+    personalForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = personalForm.elements;
+      for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].name) {
+          const field = questionForm.querySelector(`[name="${inputs[i].name}"]`);
+          if (field) field.value = inputs[i].value;
+        }
+      }
+      personalForm.classList.add('hidden');
+      questionForm.classList.remove('hidden');
+    });
+
+nextBtn.addEventListener('click', function () {
+  // Validation: Check current question answer is not empty
+  const currentInput = allQuestions[currentQuestion].querySelector('input');
+  if (!currentInput.value.trim()) {
+    alert("Please answer this question before proceeding.");
+    return; // Stop execution, don't move to next question
+  }
+
+  if (currentQuestion < allQuestions.length - 1) {
+    allQuestions[currentQuestion].classList.add('hidden');
+    currentQuestion++;
+    allQuestions[currentQuestion].classList.remove('hidden');
+    if (currentQuestion === allQuestions.length - 1) {
+      nextBtn.classList.add('hidden');
+      submitBtn.classList.remove('hidden');
+    }
+  }
+});
+
+
+    // Page load pe check karo ki already submitted hai ya nahi
+if (sessionStorage.getItem("formSubmitted") === "true") {
+  document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+  document.body.style.overflow = "hidden"; // Scroll disable
+}
+
+// Question form submit
+questionForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Agar pehle hi submit ho chuka hai
+  if (sessionStorage.getItem("formSubmitted") === "true") {
+    document.getElementById("alreadySubmittedOverlay").style.display = "flex";
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  // Validation: sab answer bhare hue hon
+  for (let q of allQuestions) {
+    const input = q.querySelector('input');
+    if (!input.value.trim()) {
+      alert("Please answer all questions before submitting.");
+      return;
+    }
+  }
+
+  // Loader show
+  statusMessage.innerHTML = `<div class="loader"></div> Processing... Please wait`;
+  statusMessage.className = "message processing";
+  statusMessage.classList.remove('hidden');
+
+  const formData = new FormData(questionForm);
+  fetch(questionForm.action, { method: 'POST', body: formData })
+    .then(() => {
+      statusMessage.textContent = "✅ Successfully Submitted!";
+      statusMessage.className = "message success";
+      sessionStorage.setItem("formSubmitted", "true"); // ✅ Set flag
+    })
+    .catch(() => {
+      statusMessage.textContent = "❌ Something went wrong. Please try again.";
+      statusMessage.className = "message";
+    });
+});
+
+
+  </script>
+
+       
+
+
+
+
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/apexcharts.min.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>
