@@ -1,10 +1,3 @@
-/*
-
-Tooplate 2135 Mini Finance
-
-https://www.tooplate.com/view/2135-mini-finance
-
-*/
 
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
@@ -1230,5 +1223,15 @@ video {
   margin: 0;
 }
 
+
+
+
+
+.question label {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: block;
+}
 
 
