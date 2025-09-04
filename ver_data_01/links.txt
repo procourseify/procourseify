@@ -1,3 +1,6 @@
 pdf1=https://drive.google.com/file/d/1-A5P7Tt7-qjVpfLAhlrYeKp8evthBiRf/view
 
 900150983cd24fb0d6963f7d28e17f72=https://drive.google.com/file/d/1-A5P7Tt7-qjVpfLAhlrYeKp8evthBiRf/preview
+
+90013f7d28e1f72=https://drive.google.com/file/d/17nMiM7KtDXH-ACvO-ZdhxB-iuHNVL1tP/preview
+
