@@ -155,29 +155,16 @@
 
                                 <!-- Personal Details Form -->
   <form id="personalForm">
-    <h2>Enter Details</h2>
+    <h2>Build Your Career with the Right Opportunities - Register Free</h2>
 
     <input type="hidden" name="Date" id="dateField">
     <input type="hidden" name="Time" id="timeField">
 
-    <div class="form-group"><label>Gender:</label><input name="Gender" required></div>
-    <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
+        <div class="form-group"><label>Full Name:</label><input name="FullName" required></div>
     <div class="form-group"><label>Mobile Number:</label><input name="Mobile" required></div>
-    <div class="form-group"><label>Alternative Mobile Number:</label><input name="AltMobile"></div>
     <div class="form-group"><label>Email:</label><input type="email" name="Email" required></div>
-    <div class="form-group"><label>Alternative Email:</label><input type="email" name="AltEmail"></div>
-    <div class="form-group"><label>State with Area:</label><input name="State" required></div>
-    <div class="form-group"><label>Age Group:</label><input name="Age" required></div>
-    <div class="form-group"><label>Profession / Occupation:</label><input name="Profession" required></div>
-    <div class="form-group"><label>Course Name:</label><input name="Course" required></div>
-    <div class="form-group"><label>Interest Level:</label><input name="Interest" required></div>
-    <div class="form-group"><label>Requirement / Need:</label><input name="Requirement" required></div>
-    <div class="form-group"><label>Budget Range:</label><input name="Budget" required></div>
-    <div class="form-group"><label>Source of Lead:</label><input name="Source" required></div>
-    <div class="form-group"><label>Sequence no:</label><input name="Sequence" required></div>
-    <div class="form-group"><label>Job Reference:</label><input name="JobRef"></div>
-    <div class="form-group"><label>Internship Reference:</label><input name="InternRef"></div>
-    <div class="form-group"><label>Which State Reference:</label><input name="StateRef"></div>
+    <div class="form-group"><label>Age:</label><input name="Age" required></div>
+    <div class="form-group"><label>Your Stream / Course:</label><input name="Course" required></div>
 
     <button type="submit">Next</button>
   </form>
@@ -185,29 +172,16 @@
   <!-- Question Form -->
   <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycby077FZh2qpEHOsq5A-XZ74bjEoMZeMJEjLIqw1JBDkppNAmez0z60QP6EyTJV1KZQA/exec">
     <!-- Hidden personal fields -->
-    <input type="hidden" name="Gender">
 <input type="hidden" name="FullName">
 <input type="hidden" name="Mobile">
-<input type="hidden" name="AltMobile">
 <input type="hidden" name="Email">
-<input type="hidden" name="AltEmail">
-<input type="hidden" name="State">
 <input type="hidden" name="Age">
-<input type="hidden" name="Profession">
 <input type="hidden" name="Course">
-<input type="hidden" name="Interest">
-<input type="hidden" name="Requirement">
-<input type="hidden" name="Budget">
-<input type="hidden" name="Source">
-<input type="hidden" name="Sequence">
-<input type="hidden" name="JobRef">
-<input type="hidden" name="InternRef">
-<input type="hidden" name="StateRef">
     <input type="hidden" name="Date">
     <input type="hidden" name="Time">
 
-    <h2>Test Questions</h2>
-    <small class="text-muted">Answering all questions is mandatory.</small>
+    <h2>Register Free</h2>
+    <small class="text-muted">Trusted by Students Across India </small>
     <div id="questionContainer"></div>
 
     <div class="form-group">
@@ -257,9 +231,8 @@
     const statusMessage = document.getElementById('statusMessage');
 
   const questions = [
-  "Q1: Could you please confirm if all the details are correct — Yes or No?",
-  "Q2: If there are any corrections needed, please highlight them.",
-  "Q3: Enter your password below to proceed.",
+  "Q1: Interested Test/Skill:-(Java/Javascript/python/C++/Web Dev/ Data Science Others)",
+  "Q2: Why do you need right now(Job / Internship / Skill Test / Certification / Others)",
  
 ];
 
