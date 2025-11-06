@@ -4,12 +4,17 @@ pdf1=https://drive.google.com/file/d/1-A5P7Tt7-qjVpfLAhlrYeKp8evthBiRf/view
 
 90013f7d28e1f72=https://drive.google.com/file/d/17nMiM7KtDXH-ACvO-ZdhxB-iuHNVL1tP/preview
 
-905809fb063f7d=https://drive.google.com/file/d/1ClY_QOW19wA8OkoNZFBo1PMsXA8Sc8_Q/preview
+905809fb063f7d=https://drive.google.com/file/d/1XGLwmCeH0pt7zw4A1wRhdYq0ZgEs7jUj/preview
 
 93c24fb0d6963f=https://drive.google.com/file/d/1HJL1m5rgWutBaIYHUSwRhNoMwcuEsrj6/preview
 
 
-902509fb0ngdfh=https://drive.google.com/file/d/10uFw5VS4rau-xbqgIWQI6Wa-9UNCGrDY/preview
+902509fb0ngdfh=https://drive.google.com/file/d/1y2vv5e79EjGYBdRyx1197HkTi8VCwUXI/preview
+
+
+928509fb06bfg2=https://drive.google.com/file/d/1L1CCdq5MWrpgayHQakFFgq6qj1nFqDQC/preview
+
+
 
 
 
